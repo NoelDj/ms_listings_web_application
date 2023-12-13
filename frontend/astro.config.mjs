@@ -3,10 +3,13 @@ import react from '@astrojs/react';
 import netlify from '@astrojs/netlify/functions';
 import tailwind from "@astrojs/tailwind";
 
-// https://astro.build/config
+import node from "@astrojs/node";
+
 export default defineConfig({
   output: 'server',
   site: 'https://example.com',
-  adapter: netlify(),
+  adapter: node({
+    mode: "standalone"
+  }),
   integrations: [react(), tailwind()]
 });

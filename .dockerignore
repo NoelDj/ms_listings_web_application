@@ -1,6 +1,11 @@
+README.md
+.gitignore
+.git/
 *.swp
 .DS_Store
 *pyc
 __pycache__/
 db.sqlite3
 .coverage
+dist
+node_modules
