@@ -1,0 +1,31 @@
+---
+// Code in the frontmatter gets executed on the server
+// Note how we have access to the `fetch` api, as well as top level await here
+
+import Layout from '../../layouts/Layout.astro'
+const { id } = Astro.params;
+
+let res = await fetch(`http://localhost:8000/api/listings/${id}`)
+let listing = await res.json();
+
+---
+
+<Layout>
+  <article>
+    <div class="px-4 py-8 md:px-6 md:py-10 lg:py-12 pb-0">
+      <div class="mx-auto w-full max-w-3xl">
+        <h1 class="mb-3 text-3xl font-semibold tracking-tighter text-slate-800 md:text-4xl">{listing.title}
+        </h1>
+        <p class="font-serif italic tracking-tighter text-slate-500">Apr 12, 2022</p>
+      </div>
+    </div>
+    <section class="px-4 py-8 md:px-6 md:py-10 lg:py-12">
+      <div class="mx-auto w-full max-w-3xl">
+        <div class="font-serif leading-relaxed md:text-xl md:leading-relaxed">
+          <p class="mb-7 last:mb-0">{listing.text}</p>
+        </div>
+      </div>
+    </section>
+  </article>
+
+</Layout>
