@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function Article(props) {
     const id = props.id
-    console.log(id)
     const [listing, setListing] = useState(null);
-    console.log(listing)
     useEffect(() => {
         const fetchListing = async () => {
             try {
