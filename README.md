@@ -1,4 +1,4 @@
 # makersupplies.dk listings web application
 
-Run with the Alpine Linux.
+Run with the Alpine Linux
 
