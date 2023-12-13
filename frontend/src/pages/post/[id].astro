@@ -3,10 +3,21 @@
 // Note how we have access to the `fetch` api, as well as top level await here
 
 import Layout from '../../layouts/Layout.astro'
-const { id } = Astro.params;
 
-let res = await fetch(`http://localhost:8000/api/listings/${id}`)
-let listing = await res.json();
+try {
+    const { id } = Astro.params;
+    let res = await fetch(`http://localhost:8000/api/listings/${id}`);
+
+    if (!res.ok) {
+        throw new Error(`Fetch failed with status ${res.status}`);
+    }
+
+    let listing = await res.json();
+    // Proceed with using the 'listing' data
+} catch (error) {
+    console.error('Error fetching data:', error);
+    // Handle the error accordingly, e.g., display a message to the user or perform necessary actions
+}
 
 ---
 
