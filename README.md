@@ -1,4 +1,4 @@
 # makersupplies.dk listings project
 
-Run on Alpine Linux
+Run on Alpine Linux.
 
