@@ -9,6 +9,7 @@ Run with Alpine Linux
 Build docker files with:
 
 docker build -t astroapp -f Dockerfile.astroapp .
+<br>
 docker build -t djangoapp -f Dockerfile.djangoapp .
 
 Deploy with:
