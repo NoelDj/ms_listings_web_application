@@ -2,3 +2,5 @@
 
 Run with Alpine Linux
 
+Deploy with:
+docker-compose up
