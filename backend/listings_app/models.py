@@ -52,8 +52,7 @@ class Listing(models.Model):
             if not samples[0] == samples[1]:
                 new_i_index = reranked.index(listings[i])
                 if new_i_index > i + 1:
-                    # down
-                    cls.objects.get(pk=listings[i]).rerank(new_i_index+1)
+                    cls.objects.get(pk=listings[i]).rerank(new_i_index + 1)
                 else:
                     cls.objects.get(pk=reranked[i]).rerank(new_i_index)
                 break
