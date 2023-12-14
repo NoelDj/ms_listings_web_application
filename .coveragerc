@@ -1,0 +1,13 @@
+[run]
+omit =
+    manage.py
+    */__init__.py
+    */migrations/*.py
+    */asgi.py
+    */wsgi.py
+
+exclude_lines =
+    def __repr__
+    if self.debug
+    raise AssertionError
+    raise NotImplementedError
