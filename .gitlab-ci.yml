@@ -19,7 +19,7 @@ static:
 build:
   stage: build
   image: registry.gitlab.com/henrikstroem/composer:latest
-  service:
+  services:
     - docker:dind
   variables:
     - DOCKER_DRIVER: overlay2
