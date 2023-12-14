@@ -26,9 +26,6 @@ SECRET_KEY = 'django-insecure-qq6e)fibio0c7(%^&6k5__%b8cq0ij)u-7a*4fn%j(ouign2*_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -134,12 +131,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = [
     'localhost',
-    'aquater.org',
+    'converli.com',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost:8000',
     'http://localhost:4321',
     'http://localhost',
 ]
