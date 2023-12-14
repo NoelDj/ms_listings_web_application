@@ -5,8 +5,9 @@ static:
   stage: static
   image: python:3.10-alpine
   before_script:
-    - pip install - sqa-requirements.txt
-    - apk update %% apk add shellcheck
+    - pip install --upgrade pip
+    - pip install -r sqa-requirements.txt
+    - apk update && apk add shellcheck
   script:
     - pylama .
     - djlint .
