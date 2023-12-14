@@ -19,6 +19,7 @@ class ListingTestCase(TestCase):
         Listing.create(title="Hello", text="some text")
 
     def test_default_order(self):
+        print(Listing.objects.all())
         listing_a = Listing.objects.get(title="a")
         listing_b = Listing.objects.get(title="b")
         assert listing_a.rank < listing_b.rank
@@ -47,7 +48,6 @@ class ListingTestCase(TestCase):
         Listing.rerank_by_list(reranked)
         assert Listing.objects.get(pk=9).rank == 1
         assert Listing.objects.get(pk=2).rank == 3
-        # assert Listing.objects.get(pk=5).rank == 3
 
     def test_empty_fields(self):
         empty_title = Listing.objects.filter(title="")[0]
@@ -61,12 +61,14 @@ class ListingTestCase(TestCase):
         assert response['content-type'] == 'text/html; charset=utf-8'
 
     def test_load_item(self):
+        print(Listing.objects.all())
         c = Client()
         response = c.get("/listing_details_partial/2/")
         assert b'b' in response.content
         assert response.status_code == 200
 
     def test_add_item(self):
+        print(Listing.objects.all())
         c = Client(HTTP_HX_CURRENT_URL="/")
         response = c.post('/create', {"title": "new", "text": "Test todo"})
         assert response.status_code == 200
