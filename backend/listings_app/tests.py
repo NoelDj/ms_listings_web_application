@@ -43,10 +43,12 @@ class ListingTestCase(TestCase):
         assert listing_c.rank == 2
 
     def test_rerank_by_list(self):
-        reranked = [9, 1, 2, 3, 4, 5, 6, 7, 8]
+        reranked = [listing.pk for listing in Listing.objects.all()]
+        first = reranked[0]
+        last = reranked[len(reranked) - 1]
         Listing.rerank_by_list(reranked)
-        assert Listing.objects.get(pk=9).rank == 1
-        assert Listing.objects.get(pk=2).rank == 3
+        assert Listing.objects.get(pk=first).rank == 1
+        assert Listing.objects.get(pk=last).rank == 9
 
     def test_empty_fields(self):
         empty_title = Listing.objects.filter(title="")[0]
@@ -60,8 +62,9 @@ class ListingTestCase(TestCase):
         assert response['content-type'] == 'text/html; charset=utf-8'
 
     def test_load_item(self):
+        listing_a = Listing.objects.get(title="a").pk
         c = Client()
-        response = c.get("/listing_details_partial/2/")
+        response = c.get(f'/listing_details_partial/{listing_a}/')
         assert b'b' in response.content
         assert response.status_code == 200
 
