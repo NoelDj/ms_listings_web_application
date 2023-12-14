@@ -12,5 +12,5 @@ static:
     - pylama .
     - djlint .
     - pip-audit
-    - ymallint *.yml
+    - yamllint *.yml
     - shellcheck *.sh
