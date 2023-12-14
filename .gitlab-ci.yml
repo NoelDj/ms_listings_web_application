@@ -22,7 +22,7 @@ build:
   services:
     - docker:dind
   variables:
-    - DOCKER_DRIVER: overlay2
+    DOCKER_DRIVER: overlay2
   before_script:
     - docker login -u gitlab-ci-token -p "$GITLAB_CI_TOKEN" "$CI_REGISTRY"
   script:
