@@ -134,6 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = [
     'localhost',
+    'aquater.org',
 ]
 
 CORS_ALLOWED_ORIGINS = [
