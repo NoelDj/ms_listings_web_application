@@ -1,5 +1,5 @@
 stages:
-  - static:
+  - static
 
 static:
   stage: static
