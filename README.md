@@ -2,8 +2,6 @@
 
 Run with Alpine Linux
 
-
-
 ## Deployment
 
 Build docker files with:
