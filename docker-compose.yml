@@ -26,8 +26,6 @@ services:
     volumes:
       - media:/media/
       - static:/static/
-    ports:
-      - 4321:4321
 
   nginx:
     image: nginx:latest
