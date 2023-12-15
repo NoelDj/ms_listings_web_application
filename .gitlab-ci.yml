@@ -26,7 +26,7 @@ build:
   before_script:
     - docker login -u gitlab-ci-token -p "$GITLAB_CI_TOKEN" "$CI_REGISTRY"
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE/djangoapp:latest" -f Dockerfile.djangoapp .
-    - docker push "$CI_REGISTRY_IMAGE/djangoapp:latest"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/djapp:latest" -f Dockerfile.djangoapp .
+    - docker push "$CI_REGISTRY_IMAGE/djapp:latest"
     - export RTE=test
     - docker-compose up --abort-on-container-exit --exit-code-from djangoapp

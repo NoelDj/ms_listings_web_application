@@ -10,7 +10,7 @@ services:
       - "env-$RTE"
 
   djangoapp:
-    image: registry.gitlab.com/noeldj/ms_listings_app/djangoapp:latest
+    image: registry.gitlab.com/noeldj/ms_listings_app/djapp:latest
     volumes:
       - media:/media/
       - static:/static/
