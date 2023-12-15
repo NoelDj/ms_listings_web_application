@@ -29,4 +29,4 @@ build:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/djapp:latest" -f Dockerfile.djangoapp .
     - docker push "$CI_REGISTRY_IMAGE/djapp:latest"
     - export RTE=test
-    - docker-compose up --abort-on-container-exit --exit-code-from djangoapp
+    - docker-compose up
