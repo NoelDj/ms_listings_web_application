@@ -28,4 +28,5 @@ build:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/djapp:latest" -f Dockerfile.djangoapp .
     - docker push "$CI_REGISTRY_IMAGE/djapp:latest"
-    - RTE=test docker-compose up
+    - RTE=test
+    - docker-compose up
