@@ -22,7 +22,7 @@ services:
       - 8000:8000
 
   astroapp:
-    image: registry.gitlab.com/noeldj/ms_listings_project/djangoapp:latest
+    image: registry.gitlab.com/noeldj/ms_listings_project/astroapp:latest
     volumes:
       - media:/media/
       - static:/static/
