@@ -137,6 +137,7 @@ ALLOWED_HOSTS = [
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4321',
     'http://localhost',
+    'http://converli.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
