@@ -138,7 +138,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:4321',
     'http://localhost',
     'http://converli.com',
-    'coverli.com'
+    'http://www.converli.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
