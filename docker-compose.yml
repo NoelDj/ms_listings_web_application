@@ -10,7 +10,7 @@ services:
       - "env-$RTE"
 
   djangoapp:
-    image: registry.gitlab.com/noeldj/ms_listings_app/djapp:latest
+    image: registry.gitlab.com/noeldj/ms_listings_project/djapp:latest
     volumes:
       - media:/media/
       - static:/static/
@@ -27,10 +27,9 @@ services:
       - ./nginx/:/etc/nginx/conf.d/
     ports:
       - 80:8000
-    depends_on:
-      - djangoapp
 
 volumes:
   postgres_data:
   media:
   static:
+
