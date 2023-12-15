@@ -18,6 +18,14 @@ services:
       - db
     env_file:
       - "env-$RTE"
+    ports:
+      - 8000:8000
+
+  astroapp:
+    image: registry.gitlab.com/noeldj/ms_listings_project/djangoapp:latest
+    volumes:
+      - media:/media/
+      - static:/static/
 
   nginx:
     image: nginx:latest
@@ -26,7 +34,9 @@ services:
       - static:/static/
       - ./nginx/:/etc/nginx/conf.d/
     ports:
-      - 80:8000
+      - 80:4321
+    depends_on:
+      - astroapp
 
 volumes:
   postgres_data:
