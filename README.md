@@ -3,6 +3,11 @@
 Run with Alpine Linux
 
 
+## Development
+
+python manage.py runserver
+npm run dev
+
 ## Deployment
 
 Build docker files with:
