@@ -14,4 +14,4 @@ docker build -t djangoapp -f Dockerfile.djangoapp .
 
 Deploy with:
 
-docker-compose up
+RTE=prod docker-compose up
