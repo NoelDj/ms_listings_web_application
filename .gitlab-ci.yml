@@ -15,7 +15,7 @@ static:
     - pip-audit
     - yamllint *.yml
     - shellcheck *.sh
-    - npm audit
+    - cd && npm audit
 
 build:
   stage: build
