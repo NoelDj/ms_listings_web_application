@@ -28,5 +28,7 @@ build:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/djapp:latest" -f Dockerfile.djangoapp .
     - docker push "$CI_REGISTRY_IMAGE/djapp:latest"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/astroapp:latest" -f Dockerfile.astroapp .
+    - docker push "$CI_REGISTRY_IMAGE/astroapp:latest"
     - export RTE=test
     - docker-compose up --abort-on-container-exit --exit-code-from djangoapp
