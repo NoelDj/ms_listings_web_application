@@ -3,6 +3,15 @@
 Run with Alpine Linux
 
 
+## Development mode
+
+python manage.py check
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+
+npm run dev
+
 ## Deployment
 
 Build docker files with:
