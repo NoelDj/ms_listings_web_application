@@ -47,6 +47,6 @@ deploy:
   script:
     - ssh $SSH_USER@$VM_IPADDRESS
     - export RTE=dev
-    - sh "~/a/ms_listings_project/deploy.sh"
+    - sh "~/ms_listings_project/deploy.sh"
   only:
     - main
