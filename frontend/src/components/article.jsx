@@ -7,7 +7,7 @@ export default function Article(props) {
     useEffect(() => {
         const fetchListing = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/listings/${id}/`);
+                const response = await fetch(`http://converli.com/api/listings/${id}/`);
                 if (!response.ok) {
                     throw new Error(`Fetch failed with status ${response.status}`);
                 }

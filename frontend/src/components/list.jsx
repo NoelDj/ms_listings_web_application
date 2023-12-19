@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 export default function List() {
     const [listings, setListings] = useState([]);
     useEffect(() => {
-        const url = 'http://localhost:8000/api/listings/';
+        const url = 'http://converli.com:8000/api/listings/';
 
         const fetchTodos = async () => {
             try {

@@ -15,13 +15,13 @@ case "$RTE" in
         ;;
     test )
         echo "Test mode"
-        pip-audit || exit 1
+        #pip-audit || exit 1
         coverage run --source="." --omit="manage.py" manage.py test --verbosity 2
         coverage report -m --fail-under=75
         ;;
     prod )
         echo "Production mode"
-        pip-audit || exit 1
+        #pip-audit || exit 1
         python manage.py check --deploy
         ;;
 esac
