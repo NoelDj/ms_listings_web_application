@@ -1,13 +1,12 @@
 FROM node:lts-alpine as runtime
 
-COPY /frontend /app
-
 WORKDIR /app
 
-RUN npm install -g npm@10.2.5
-RUN npm install
-RUN npm run build
+COPY /frontend /app
 
+RUN npm install -g npm@10.2.5 && \
+    npm install && \
+    npm run build
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
