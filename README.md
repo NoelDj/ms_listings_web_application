@@ -1,6 +1,6 @@
 # makersupplies.dk listings web application
 
-Run with Alpine Linux
+Run with Alpine Linux using Docker
 
 
 ## Development mode
