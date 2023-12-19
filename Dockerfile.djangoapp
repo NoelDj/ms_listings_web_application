@@ -5,7 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN apk add python3-dev postgresql-client postgresql-dev musl-dev build-base
 
-COPY ./backend /app
+COPY /backend /app
 COPY ./entrypoint-django-app.sh /app
 WORKDIR /app
 
