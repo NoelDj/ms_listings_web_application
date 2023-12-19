@@ -10,9 +10,7 @@ services:
       - "env-$RTE"
 
   djangoapp:
-    image: registry.gitlab.com/noeldj/ms_listings_project/djangoapp:latest
-    volumes:
-      - media:/media/
+    image: djangoapp:latest
       - static:/static/
     depends_on:
       - db
@@ -22,7 +20,7 @@ services:
       - 8000:8000
 
   astroapp:
-    image: registry.gitlab.com/noeldj/ms_listings_project/astroapp:latest
+    image: astroapp:latest
     volumes:
       - media:/media/
       - static:/static/
