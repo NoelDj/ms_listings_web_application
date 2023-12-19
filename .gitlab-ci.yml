@@ -26,6 +26,9 @@ build:
     DOCKER_DRIVER: overlay2
   before_script:
     - docker login -u gitlab-ci-token -p "$GITLAB_CI_TOKEN" "$CI_REGISTRY"
+    - echo POSTGRES_USER_URL=$POSTGRES_USER_URL >> env_test
+    - echo POSTGRES_PASSWORD=$POSTGRES_PASSWORD >> env_test
+    - echo POSTGRES_DB=$POSTGRES_DB >> env_test
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/djangoapp:latest" -f Dockerfile.djangoapp .
     - docker push "$CI_REGISTRY_IMAGE/djangoapp:latest"
