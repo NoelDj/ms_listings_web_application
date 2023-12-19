@@ -5,7 +5,7 @@ export default function Article(props) {
     const id = props.id
     const [listing, setListing] = useState(null);
     useEffect(() => {
-        const url = `${window.location.protocol}//${window.location.hostname}:8000/api/listings/`
+        const url = `${window.location.protocol}//${window.location.hostname}:8000/api/listings/${id}/`
         const fetchListing = async () => {
             try {
                 const response = await fetch(url);
