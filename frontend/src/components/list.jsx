@@ -11,7 +11,7 @@ export default function List() {
                 console.log(data);
                 setListings(data);
             } catch (error) {
-                console.log(error);
+                console.error('Error fetching data:', error);
             }
         };
         fetchTodos()
