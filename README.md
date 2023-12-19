@@ -3,7 +3,6 @@
 Run with Alpine Linux using Docker
 
 
-
 ## Development mode
 
 python -m venv .venv
