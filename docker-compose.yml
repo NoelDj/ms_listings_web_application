@@ -10,7 +10,7 @@ services:
       - "env_$RTE"
 
   djangoapp:
-    image: djangoapp:latest
+    image: registry.gitlab.com/noel100/ms_listings_web_application/djangoapp:latest
     volumes:
       - media:/media/
       - static:/static/
@@ -22,7 +22,7 @@ services:
       - 8000:8000
 
   astroapp:
-    image: astroapp:latest
+    image: registry.gitlab.com/noel100/ms_listings_web_application/astroapp:latest
     volumes:
       - media:/media/
       - static:/static/
