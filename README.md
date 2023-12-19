@@ -3,9 +3,18 @@
 Run with Alpine Linux
 
 
-## Development
+## Development mode
 
+python -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+
+python manage.py check
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
+
+npm i
 npm run dev
 
 ## Deployment
