@@ -29,8 +29,10 @@ build:
     - docker login -u gitlab-ci-token -p "$GITLAB_CI_TOKEN" "$CI_REGISTRY"
     - cp ${env_test} env_test
   script:
+    - docker rmi "$CI_REGISTRY_IMAGE/djangoapp:latest"
     - docker build --pull -t "$CI_REGISTRY_IMAGE/djangoapp:latest" -f Dockerfile.djangoapp .
     - docker push "$CI_REGISTRY_IMAGE/djangoapp:latest"
+    - docker rmi "$CI_REGISTRY_IMAGE/astroapp:latest"
     - docker build --pull -t "$CI_REGISTRY_IMAGE/astroapp:latest" -f Dockerfile.astroapp .
     - docker push "$CI_REGISTRY_IMAGE/astroapp:latest"
     - export RTE=test
