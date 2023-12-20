@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    404
-</body>
-</html>
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+        
+<Layout>
+    <div class="px-6 py-8">
+        <div class="flex justify-between container mx-auto my-10">
+            <div class="w-full lg:w-8/12">
+                <h1 class="text-xl font-bold text-gray-700 md:text-2xl">404</h1>
+                <p>Page was not found</p>
+                <a href="/" class="underline">Return to homepage</a>
+            </div>
+        </div>
+    </div>
+</Layout>
