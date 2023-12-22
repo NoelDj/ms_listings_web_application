@@ -1,9 +1,54 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from .models import Listing
-from rest_framework import generics
-from .serializers import ListingSerializer
-# Create your views here.
+from django.http import HttpResponse, JsonResponse
+from .models import Listing, User
+from rest_framework import generics, status
+from .serializers import ListingSerializer, TokenObtainPairSerializer, RegisterSerializer
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+
+
+class TokenObtainPairView(TokenObtainPairView):
+    serializer_class = TokenObtainPairSerializer
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        '/api/token/',
+        '/api/register/',
+    ]
+    return Response(routes)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def dashboard(request):
+    if request.method == "GET":
+        context = f"Hello {request.user.username}"
+        return Response({'response': context}, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        text = "Hello buddy"
+        data = f'Congratulation your API just responded to POST request with text: {text}'
+        return Response({'response': data}, status=status.HTTP_200_OK)
+    return Response({}, status.HTTP_400_BAD_REQUEST)
+
+
+def getRoute(request):
+    routes = [
+        '/api/token/',
+        '/api/register/',
+        '/api/token/refresh/'
+    ]
+
+    return JsonResponse(routes, safe=False)
 
 
 def index(request):

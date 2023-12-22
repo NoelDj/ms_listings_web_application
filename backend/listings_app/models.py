@@ -1,4 +1,41 @@
 from django.db import models, transaction
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    username = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+    bio = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="user_images", default="default.jpg")
+    verified = models.BooleanField(default=False)
+
+    @property
+    def full_name(self) -> str:
+        return f'{self.first_name} {self.last_name}'
+
+    def __str__(self):
+        return self.full_name
+
+    def create_user(sender, instance, created, **kwargs):
+        if created:
+            User.objects.create(user=instance)
+
+
+def save_user(sender, instance, **kwargs):
+    instance.create(user=instance)
+
+    """ def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
+    post_save.connect(create_user_profile, sender=User)
+    post_save.connect(save_user_profile, sender=User) """
 
 
 class Listing(models.Model):
