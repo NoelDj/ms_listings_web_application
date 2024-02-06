@@ -5,19 +5,16 @@ from rest_framework_simplejwt.views import (TokenRefreshView,)
 app_name = 'listings_app'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('token/', views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('register/', views.RegisterView.as_view(), name='auth_register'),
-    path('dashboard/', views.dashboard, name='dashboard'),
-
-    path('listing_partial', views.listing_partial, name='listing_partial'),
-    path('listing_details_partial/<int:pk>/',
-         views.listing_details_partial, name='listing_details_partial'),
-    path('create', views.create, name='create'),
-    path('rerank', views.rerank, name='rerank'),
-    path('api/listings/', views.ListingListAPIView.as_view(), name='listing-api'),
-    path('api/listings/<int:pk>/',
-         views.ListingDetailAPIView.as_view(), name='listing-detail'),
-
+    path('auth/token', views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('users', views.users_collection, name='users_collection'),
+    path('users/<str:username>', views.user_detail, name='user_detail'),
+    path('listings', views.listings_collection, name='listings_collection'),
+    path('listings/<int:id>', views.listing_detail, name='listing_detail'),
+    path('categories', views.categories_collection, name='categories_collection'),
+    path('categories/<str:name>', views.category_detail, name='category_detail'),
+    path('comments', views.comments_collection, name='comments_collection'),
+    path('comments/<int:id>', views.comment_detail, name='comment_detail'),
+    path('likes', views.likes_collection, name='likes_collection'),
+    path('likes/<int:id>', views.like_detail, name='like_detail'),
 ]

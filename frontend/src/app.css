@@ -1,0 +1,25 @@
+/* Importing Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+textarea { 
+    resize: none;
+}
+
+
+.article h1 {
+    font-size: 2rem;
+}
+
+.article h2 {
+    font-size: 1.6rem;
+}
+
+.article h3 {
+    font-size: 1.6rem;
+}
+
+.article .ql-align-right {
+    text-align: right;
+}
