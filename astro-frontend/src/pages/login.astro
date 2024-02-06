@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Login from '../components/login.svelte'
+---
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        
+<Layout>
+    <div class="px-6 py-8">
+        <div class="flex justify-between container mx-auto">
+            <Login client:load></Login>
+        </div>
+    </div>
+</Layout>

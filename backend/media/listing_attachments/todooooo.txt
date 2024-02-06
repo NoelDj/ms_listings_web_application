@@ -1,0 +1,116 @@
+
+xAPI: get /listings - get all listings WEB: / and /listings/manage
+xAPI: post /listings - post 1 listings WEB: /listings/create
+
+xAPI: put /listing/id - update 1 listing WEB: /listing/id/edit
+xAPI: delete /listing/id - delete 1 listing WEB: listings/manage - listing/id/edit
+xAPI: get /listing/id - xWEB: /listing/id
+
+
+xGET: listings/id -> SVELTE:listings/id -> API:listings/id | use load function
+xDELETE: /dashboard -> SVELTE:listings/id -> API:/listing/id | use form action
+xPUT: /listing/id/edit -> SVELTE:listings/id -> API:/listing/id | use form action
+
+
+x1: image set description to "" instead of null
+x2: image change image to src
+x3: research best practice for src type
+
+
+
+##models with paginations
+listings - yes
+users - yes
+likes - probably not
+comments - maybe in the future
+categories - no
+image - maybe in the future 
+file attachment - maybe in the future
+
+
+backend
+
+x4: create: manage file upload for multiple images, and validate
+x5: update: update views for put
+x6: delete: test
+x7: get: test
+
+frontend
+
+x8: create: handle fileupload input
+x9: get: display all images (check if one or more)
+10: update: handlele fileupload input
+x11: delete: test
+
+
+BACKEND
+xcomment endpoints
+xuser endpoints (crud)
+xpagination
+
+xlike unlike endpoints
+xfiles model
+xhave search pages for users and listings model handled (in the future maybe, picture and files)
+xupdate endpoint names
+xtest endpoints
+
+
+FRONTEND
+
+x'auth/token' (login)
+x'auth/token/refresh'
+xcreate 'users'
+?get 'users'
+xget 'users/<str:username>'
+update 'users/<str:username>'
+?delete 'users/<str:username>'
+xget 'listings'
+post 'listings'
+xget 'listings/<int:id>'
+update 'listings/<int:id>'
+delete 'listings/<int:id>'
+xget'categories/<str:name>'
+
+get'comments'
+post'comments'
+delete 'comments/<int:id>'
+?update 'comments/<int:id>'
+get likes count 'likes'
+post 'likes/<int:id>'
+delete 'likes/<int:id>'
+
+
+/check if signed in with on load function
+/show comment text area if signed in
+/user can like if logged in
+
+/check original auth and update it
+
+
+
+
+
+
+
+
+
+
+/add email
+/ssh
+
+
+// answer why use hooks?
+xhandle post and get when expired
+// answer why not only client side?
+// answer why not only astro js?
+
+
+##not important
+
+/sign in show errors in front page
+/register show errors in front page
+
+/validate files uploaded and updated
+/validate images uploaded and updated
+/validate listing text (html)
+/validate comment text

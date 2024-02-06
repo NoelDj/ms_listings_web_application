@@ -1,0 +1,46 @@
+---
+import Header from '../components/header.svelte'
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms Listings</title>
+    <meta name="author" content="Noel">
+    <meta name="description" content="">
+
+  <!-- Font Awesome -->
+</head>
+<body class="font-family-karla">
+
+    
+    <Header client:load></Header>
+
+    <main>
+        <slot />
+    </main>
+
+    <footer class="w-full border-t bg-white pb-12">
+        <div
+            class="relative w-full flex items-center invisible md:visible md:pb-12"
+            x-data="getCarouselData()"
+        >
+            <template x-for="image in images.slice(currentIndex, currentIndex + 6)" :key="images.indexOf(image)">
+                <img class="w-1/6 hover:opacity-75" :src="image">
+            </template>
+        </div>
+        <div class="w-full container mx-auto flex flex-col items-center">
+            <div class="flex flex-col md:flex-row text-center md:text-left md:justify-between py-6">
+                <a href="#" class="uppercase px-3">About Us</a>
+                <a href="#" class="uppercase px-3">Privacy Policy</a>
+                <a href="#" class="uppercase px-3">Terms & Conditions</a>
+                <a href="#" class="uppercase px-3">Contact Us</a>
+            </div>
+            <div class="uppercase pb-6">&copy;MS Listings</div>
+        </div>
+    </footer>
+
+</body>
+</html>
