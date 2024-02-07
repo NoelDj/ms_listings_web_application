@@ -2,7 +2,7 @@ import { API_BASE_URL } from "$env/static/private"
 import UserFetch from "../../../../utils/userFetch"
 
 export async function load({ params }) {
-    const response = await fetch(API_BASE_URL + "/api/listings/" + params.id)
+    const response = await fetch(API_BASE_URL + "/listings/" + params.id)
     const data = await response.json()
 
     return {"listing":data.listing}

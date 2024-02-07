@@ -15,13 +15,13 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS('Creating categories'))
         self.create_categories()
-        self.stdout.write(self.style.SUCCESS('Creating users'))
-        self.create_dummy_users()
+        #self.stdout.write(self.style.SUCCESS('Creating users'))
+        #self.create_dummy_users()
 
         
 
-        self.stdout.write(self.style.SUCCESS('Creating dummy listings...'))
-        self.create_dummy_listings()
+        #self.stdout.write(self.style.SUCCESS('Creating dummy listings...'))
+        #self.create_dummy_listings()
 
     def create_dummy_users(self, total_users=100):
         User.create_super_user(username="noel", email="noel.klp@gmail.com", password="deXSA1234", bio="Interested in learning new stuff.")

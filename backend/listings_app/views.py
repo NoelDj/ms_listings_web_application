@@ -168,7 +168,7 @@ def listings_collection(request):
         images = request.data.getlist('images')
         files = request.data.getlist('files')
 
-        validation_result_images = validate_uploads(images, max_uploads=2, allowed_file_types=['.png', '.jpg'], allowed_file_size=3000)
+        validation_result_images = validate_uploads(images, max_uploads=2, allowed_file_types = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.webp', '.eps'], allowed_file_size=3000)
 
         if validation_result_images:
             return validation_result_images
@@ -182,6 +182,7 @@ def listings_collection(request):
         if serializer.is_valid():
             serializer.save(category=category, user=request.user, images=request.data.getlist('images'))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
         return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
     
     

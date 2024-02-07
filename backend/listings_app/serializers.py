@@ -29,7 +29,7 @@ class UserSerializer(serializers.ModelSerializer):
         write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
     username = serializers.CharField(min_length=1, max_length=50)
-    bio = serializers.CharField(min_length=1, max_length=600)
+    bio = serializers.CharField(min_length=1, max_length=600, required=False)
 
     class Meta:
         model = User
