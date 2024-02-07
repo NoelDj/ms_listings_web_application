@@ -9,8 +9,8 @@ python manage.py migrate
 case "$RTE" in
     dev )
         echo "Development mode"
-        coverage run --source="." --omit="manage.py" manage.py test --verbosity 2
-        coverage report -m
+#        coverage run --source="." --omit="manage.py" manage.py test --verbosity 2
+#        coverage report -m
         python manage.py runserver 0.0.0.0:8000
         ;;
     test )

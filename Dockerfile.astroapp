@@ -1,15 +1,28 @@
-FROM node:lts-alpine as runtime
+FROM node:lts-alpine as build
 
 WORKDIR /app
 
-COPY /frontend /app
+COPY frontend/package.json /app/
+RUN npm install
 
-RUN npm install -g npm@10.2.5 && \
-    npm install && \
-    npm run build
+COPY frontend /app
+
+RUN npm run build
+
+FROM node:lts-alpine AS production
+
+WORKDIR /app
+
+COPY --from=build /app/build ./build
+COPY --from=build /app/package.json .
+COPY --from=build /app/package-lock.json .
+
+RUN npm ci --only=production
 
 ENV HOST=0.0.0.0
-ENV PORT=4321
-EXPOSE 4321
+ENV PORT=3000
+ENV ORIGIN=http://converli.com
 
-CMD ["node", "dist/server/entry.mjs"]
+EXPOSE 3000
+
+CMD ["node", "build/index.js"]
