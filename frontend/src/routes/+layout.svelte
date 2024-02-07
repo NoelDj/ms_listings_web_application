@@ -11,7 +11,6 @@
             <a href="/dashboard" data-svelte-reload>Dashboard</a>
             <a href="/listings/create" data-svelte-reload>Create Listing</a>
             <form method="POST" action="/signout" data-svelte-reload><button>Logout</button></form>
-            <a href="/category/builds" data-svelte-reload>builds</a>     
             <a href="/dashboard/settings" data-svelte-reload>Settings</a>     
         </nav>
     </header>
