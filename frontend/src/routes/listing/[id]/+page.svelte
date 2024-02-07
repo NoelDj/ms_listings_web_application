@@ -12,7 +12,7 @@
     const {name} = data.listing.category
     const files = data.listing.files
     const listingImage = data.listing.images[0].src || ""
-    const baseImagePath = "http://localhost:8000"
+    const baseImagePath = data.baseImagePath
  
     const comments = data.comments
     

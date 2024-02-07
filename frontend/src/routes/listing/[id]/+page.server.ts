@@ -1,5 +1,5 @@
 import { error,} from '@sveltejs/kit';
-import { API_BASE_URL } from '$env/static/private';
+import { API_BASE_URL, BASE_URL } from '$env/static/private';
 import { isValid } from '../../../utils/auth';
 import UserFetch from '../../../utils/userFetch';
 import { jwtDecode } from 'jwt-decode';
@@ -37,13 +37,15 @@ export async function load({ params, request, cookies }) {
   const dataComments = await responseComments.json()
   
   const comments = dataComments
+  const baseImagePath = BASE_URL
   return {
     listing,
     isAuthenticated,
     comments,
     userId,
     isLiked,
-    likeId
+    likeId,
+    baseImagePath
   }
 }
 

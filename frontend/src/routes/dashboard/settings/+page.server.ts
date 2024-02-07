@@ -18,7 +18,7 @@ export const actions = {
         const formData = await request.formData()
 
         const path = "users/" + user.username
-        const useFetch = new UserFetch('http://localhost:8000/api', token)
+        const useFetch = new UserFetch(API_BASE_URL, token)
         const response = await useFetch.put(path, formData)
         const data = await response.json()
         

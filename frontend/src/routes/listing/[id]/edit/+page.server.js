@@ -1,8 +1,8 @@
+import { API_BASE_URL } from "$env/static/private"
 import UserFetch from "../../../../utils/userFetch"
 
 export async function load({ params }) {
-
-    const response = await fetch("http://localhost:8000/api/listings/" + params.id)
+    const response = await fetch(API_BASE_URL + "/api/listings/" + params.id)
     const data = await response.json()
 
     return {"listing":data.listing}
@@ -29,7 +29,7 @@ export const actions = {
         removeEmptyUploads(uploads)
 
         const path = "listings/" + params.id
-        const useFetch = new UserFetch('http://localhost:8000/api', token)
+        const useFetch = new UserFetch(API_BASE_URL, token)
         const response = await useFetch.put(path, formData)
         
     } 
