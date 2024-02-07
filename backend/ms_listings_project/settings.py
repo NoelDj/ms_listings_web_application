@@ -87,7 +87,7 @@ DATABASES = {
     }
 }
 
-""" 
+"""
 'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ['POSTGRES_DB'],
@@ -147,6 +147,7 @@ ALLOWED_HOSTS = [
     'localhost',
     'converli.com',
     '127.0.0.1',
+    '192.168.16.3',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -230,3 +231,4 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Think | Create | Inspire",
     "copyright": "www.desphixs.com",
 }
+
