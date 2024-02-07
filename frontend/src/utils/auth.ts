@@ -49,10 +49,12 @@ export const setCookies = (event, tokens) => {
     event.locals.token = tokens.access
     event.cookies.set("authToken", tokens.access, {
         path: "/",
+        secure: false,
     });
     
     event.cookies.set("refreshToken", tokens.refresh, {
         path: "/",
+        secure: false,
     });
 }
 

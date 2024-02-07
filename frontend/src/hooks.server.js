@@ -28,10 +28,7 @@ export async function handle({ event, resolve }) {
  
     if (!isAuthenticated) redirect(301, '/login')
     
-    
-    
-
-	const response = await resolve(event);
+    const response = await resolve(event);
     return response;
 }
 
