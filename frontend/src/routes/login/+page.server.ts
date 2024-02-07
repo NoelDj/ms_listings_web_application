@@ -3,9 +3,9 @@ import { API_BASE_URL } from '$env/static/private';
 
 
 export const actions = {
-    default: async (e) => {
-        const formData = await e.request.formData();
-        
+    default: async ({cookies, request}) => {
+        const formData = await request.formData();
+
         const response = await fetch(`${API_BASE_URL}/auth/token`, {
             method: 'POST',
             body: formData
@@ -17,17 +17,24 @@ export const actions = {
 
         const data = await response.json();
 
-        const accesToken = data.access;
+        console.log(data)
+
+        const accessToken = data.access;
         const refreshToken = data.refresh;
 
-
-        e.cookies.set("authToken", accesToken, {
+        cookies.set("authToken", accessToken, {
             path: "/",
+            secure: false,
         });
 
-        e.cookies.set("refreshToken", refreshToken, {
+        cookies.set("refreshToken", refreshToken, {
             path: "/",
+            secure: false,
         });
+
+
+        console.log("Set cookies")
+        console.log(cookies)
 
         redirect(301, "/dashboard")
     }
