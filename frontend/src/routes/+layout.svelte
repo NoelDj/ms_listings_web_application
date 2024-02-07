@@ -7,7 +7,7 @@
 {#if !data.isExpired}
     <header class="container mx-auto p-4 mb-3 shadow">
         <nav class="flex gap-3">
-            <a href="/" data-svelte-reload >Home</a>
+            <a href="/" data-svelte-reload>Home</a>
             <a href="/dashboard" data-svelte-reload>Dashboard</a>
             <a href="/listings/create" data-svelte-reload>Create Listing</a>
             <form method="POST" action="/signout" data-svelte-reload><button>Logout</button></form>
@@ -32,7 +32,7 @@
 <footer class="border-t container mx-auto pt-12 pb-32 px-4 lg:px-0">
     <div class="container">
     <div> 
-      <img src="https://makersupplies.dk/img/cms/makersupplies-dk-logo-forum.png" class="h-12 w-12" alt="logo">
+      <img src="https://makersupplies.dk/img/cms/makersupplies-dk-logo-forum.png" class="h-12" alt="logo">
     </div>
     <div class="flex flex-wrap">
       <div class="w-full lg:w-2/5">
@@ -53,10 +53,10 @@
       <div class="w-full mt-6 lg:mt-0 md:w-1/2 lg:w-1/5">
         <h6 class="font-semibold text-gray-700 mb-4">Categories</h6>
         <ul>
-          <li> <a href="http://converli.com/category/builds" class="block text-gray-600 py-2">Builds</a> </li>
-          <li> <a href="http://converli.com/category/resources" class="block text-gray-600 py-2">Resources</a> </li>
-          <li> <a href="http://converli.com/category/projects" class="block text-gray-600 py-2">Projects</a> </li>
-          <li> <a href="http://converli.com/category/documents" class="block text-gray-600 py-2">Documents</a> </li>
+          <li> <a href="http://converli.com/category/builds" class="block text-gray-600 py-2" data-svelte-reload>Builds</a> </li>
+          <li> <a href="http://converli.com/category/resources" class="block text-gray-600 py-2" data-svelte-reload>Resources</a> </li>
+          <li> <a href="http://converli.com/category/projects" class="block text-gray-600 py-2" data-svelte-reload>Projects</a> </li>
+          <li> <a href="http://converli.com/category/documents" class="block text-gray-600 py-2" data-svelte-reload>Documents</a> </li>
         </ul>
       </div>
 
