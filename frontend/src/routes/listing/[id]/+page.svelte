@@ -76,10 +76,6 @@
               </div>
             </div>
             <p class="text-gray-700 py-3">{bio}</p>
-            <button class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
-              Follow 
-              <i class='bx bx-user-plus ml-2' ></i>
-            </button>
           </div>
           <div>
             <ul>
