@@ -4,7 +4,7 @@ export const actions = {
   default: async ({ cookies }) => {
 
     try {
-        await cookies.delete("authToken", { path: '/' });
+        await cookies.delete("authToken", { path: '/', secure: false });
     } catch (err) {
         console.log("Error", err)
     }
