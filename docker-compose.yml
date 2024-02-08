@@ -29,19 +29,17 @@ services:
       - static:/static/
     depends_on:
       - djangoapp
-    ports:
-      - 80:3000
 
-        #  nginx:
-        #image: nginx:latest
-        #volumes:
-        #- media:/media/
-        #- static:/static/
-        #- ./nginx/:/etc/nginx/conf.d/
-        #ports:
-        #- 80:3000
-        #depends_on:
-        #- astroapp
+  nginx:
+    image: nginx:latest
+    volumes:
+      - media:/media/
+      - static:/static/
+      - ./nginx/:/etc/nginx/conf.d/
+      ports:
+        - 80:3000
+      depends_on:
+        - astroapp
 
 volumes:
   postgres_data:
