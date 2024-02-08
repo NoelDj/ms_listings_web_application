@@ -20,7 +20,6 @@
             <a data-sveltekit-reload href="/">Home</a>
             <a href="/login">Login</a>
             <a href="/register">Register</a>
-            <a href="/category/builds">builds</a>
         </nav>
     </header>
 {/if}
@@ -53,10 +52,10 @@
       <div class="w-full mt-6 lg:mt-0 md:w-1/2 lg:w-1/5">
         <h6 class="font-semibold text-gray-700 mb-4">Categories</h6>
         <ul>
-          <li> <a href="http://converli.com/category/builds" class="block text-gray-600 py-2" data-svelte-reload>Builds</a> </li>
-          <li> <a href="http://converli.com/category/resources" class="block text-gray-600 py-2" data-svelte-reload>Resources</a> </li>
-          <li> <a href="http://converli.com/category/projects" class="block text-gray-600 py-2" data-svelte-reload>Projects</a> </li>
-          <li> <a href="http://converli.com/category/documents" class="block text-gray-600 py-2" data-svelte-reload>Documents</a> </li>
+          <li> <a data-sveltekit-reload href="http://converli.com/category/builds" class="block text-gray-600 py-2">Builds</a> </li>
+          <li> <a data-sveltekit-reload href="http://converli.com/category/resources" class="block text-gray-600 py-2">Resources</a> </li>
+          <li> <a data-sveltekit-reload href="http://converli.com/category/projects" class="block text-gray-600 py-2">Projects</a> </li>
+          <li> <a data-sveltekit-reload href="http://converli.com/category/documents" class="block text-gray-600 py-2">Documents</a> </li>
         </ul>
       </div>
 

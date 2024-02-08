@@ -12,9 +12,9 @@
         <button class="bg-sky-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="submit">
           Sign In
         </button>
-        <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="/">
+        <!-- <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="/">
           Forgot Password?
-        </a>
+        </a> -->
       </div>
     </form>
   </div>
