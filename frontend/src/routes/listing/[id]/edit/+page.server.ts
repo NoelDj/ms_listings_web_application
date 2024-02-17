@@ -13,8 +13,6 @@ export const actions = {
         const token = cookies.get('authToken')
         const formData = await request.formData()
 
-        console.log(formData.get('remove_images'))
-
         const uploads = ['files', 'images'];
 
         const removeEmptyUploads = (list) => {
@@ -32,8 +30,6 @@ export const actions = {
         const useFetch = new UserFetch(API_BASE_URL, token)
         const response = await useFetch.put(path, formData)
         const data = await response.json()
-
-        console.log(data)
         
     } 
 }

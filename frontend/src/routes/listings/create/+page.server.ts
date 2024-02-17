@@ -27,7 +27,6 @@ export const actions = {
             
             const titleValue = formData.get('title')
             const textValue = formData.get('text')
-            console.log(data)
 
             const dataObject: DataObject = {
                 images : {},

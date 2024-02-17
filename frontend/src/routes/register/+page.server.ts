@@ -44,8 +44,6 @@ export const actions = {
                 password2: {}
             }
 
-            console.log(data)
-
             for (const property in dataObject) {
                 if (data.message[property] && data.message[property][0] === 'This field may not be blank.') {
                     dataObject[property].missing = true

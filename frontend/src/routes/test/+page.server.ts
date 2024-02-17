@@ -6,31 +6,28 @@ interface DataObject {
 
 export const actions = {
     login: async ({ request }: { request }) => {
-        console.log('login');
 
-        const data = await request.formData();
-        const email = data.get('email');
-        const password = data.get('password');
+        const data = await request.formData()
+        const email = data.get('email')
+        const password = data.get('password')
 
         const dataObject: DataObject = {
-            email: { value: email || '' }, // Set value property regardless
+            email: { value: email || '' },
             password: { value: password || '' }
-        };
+        }
 
         if (!email) {
-            console.log('no email');
-            dataObject.email.missing = true; // Set missing property if email is missing
+            dataObject.email.missing = true
         }
 
         if (!password) {
-            console.log('no password');
             dataObject.password.incorrect = true;
         }
 
         if (Object.values(dataObject).some(field => field.missing || field.incorrect)) {
-            return fail(400, dataObject);
+            return fail(400, dataObject)
         }
 
-        return { success: true };
+        return { success: true }
     }
 };

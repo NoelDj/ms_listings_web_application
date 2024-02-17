@@ -7,7 +7,6 @@
   const {title,text,id} = data.listing
   const images = data.listing.images
   const files = data.listing.files
-  console.log(images)
 
   //const { username, email } = data.decode;
   //const token = data.token;
