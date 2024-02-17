@@ -10,7 +10,7 @@ static:
   before_script:
     - pip install --upgrade pip
     - pip install -r sqa-requirements.txt
-    - apk update && apk add shellcheck nodejs npm
+    - apk update && apk add shellcheck nodejs npm git
     - npm install eslint eslint-plugin-@typescript-eslint/eslint-plugin
   script:
     - pylama ./backend
