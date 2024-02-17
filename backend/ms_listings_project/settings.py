@@ -52,8 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'http_put_parsing.middleware.HttpPutParsingMiddleware'
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'ms_listings_project.urls'
