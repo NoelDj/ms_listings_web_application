@@ -5,7 +5,7 @@ interface DataObject {
 }
 
 export const actions = {
-    login: async ({ request }: { request: any }) => {
+    login: async ({ request }: { request }) => {
         console.log('login');
 
         const data = await request.formData();

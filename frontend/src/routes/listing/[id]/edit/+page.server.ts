@@ -8,10 +8,6 @@ export async function load({ params }) {
     return {"listing":data.listing}
 }
 
-interface DataObject {
-    [key: string]: { value?: string; missing?: boolean; incorrect?: boolean; exists?: boolean; errors?: Array<string>}
-}
-
 export const actions = {
     updateListing: async ({cookies, request, params}) => {
         const token = cookies.get('authToken')

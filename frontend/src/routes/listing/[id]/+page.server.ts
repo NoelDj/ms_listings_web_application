@@ -7,7 +7,7 @@ import { fail } from '@sveltejs/kit';
 
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params, request, cookies }) {
+export async function load({ params, cookies }) {
   const response = await fetch(`${API_BASE_URL}/listings/${params.id}`)
   const data = await response.json()
   
