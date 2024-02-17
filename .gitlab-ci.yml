@@ -21,8 +21,10 @@ static:
 lint:
   stage: staticjavascript
   image: node
-    - npm i eslint eslint-plugin-@typescript-eslint/eslint-plugin
-    - node_modules/eslint/bin/eslint.js ./frontend
+  before_script:
+    - npm install eslint @typescript-eslint/eslint-plugin
+  script:
+    - node_modules/.bin/eslint ./frontend
 
 build:
   stage: build
