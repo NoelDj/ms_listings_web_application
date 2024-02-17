@@ -18,7 +18,6 @@ class User(AbstractUser):
     def full_name(self) -> str:
         return f'{self.first_name} {self.last_name}'
 
-
     @classmethod
     def create_user(cls, username, email, password,):
         email = cls.objects.normalize_email(email)
@@ -29,7 +28,7 @@ class User(AbstractUser):
         user.set_password(password)
         user.save()
         return user
-    
+
     @classmethod
     def create_super_user(cls, username, email, password, bio):
         email = cls.objects.normalize_email(email)
@@ -43,7 +42,7 @@ class User(AbstractUser):
         user.set_password(password)
         user.save()
         return user
-    
+
     def update_user(self, bio=None, image=None):
         if bio:
             self.bio = bio
@@ -51,7 +50,7 @@ class User(AbstractUser):
             self.image = image
         self.save()
         return self
-    
+
     def delete_user(self):
         self.delete()
 
@@ -61,7 +60,7 @@ class User(AbstractUser):
 
 class Listing(models.Model):
     title = models.CharField(max_length=100, db_index=True)
-    text = models.TextField(max_length=2400*15)
+    text = models.TextField(max_length=2400 * 15)
     owner = models.ForeignKey('User', on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -93,7 +92,7 @@ class Listing(models.Model):
     @classmethod
     def get_listing_by_id(cls, listing_id):
         return cls.objects.get(id=listing_id)
-    
+
     def update_listing(self, title=None, text=None, images=None, remove_images=None, files=None, remove_files=None):
         if title:
             self.title = title
