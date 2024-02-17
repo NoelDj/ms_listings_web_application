@@ -18,7 +18,7 @@ static:
     - yamllint *.yml
     - shellcheck *.sh
 
-staticjavascript:
+lint:
   stage: staticjavascript
   image: node
     - npm i eslint eslint-plugin-@typescript-eslint/eslint-plugin
