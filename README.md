@@ -22,7 +22,7 @@ npm run dev
 
 Build docker files with:
 
-docker build -t astroapp -f Dockerfile.astroapp .
+docker build -t svleteapp -f Dockerfile.svelteapp .
 <br>
 docker build -t djangoapp -f Dockerfile.djangoapp .
 
