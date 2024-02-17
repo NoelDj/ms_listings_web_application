@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY frontend/package.json ./
 COPY frontend/package-lock.json ./
-RUN apk add --no-cache git && npm ci
+
+RUN apk add --no-cache git && npm install
 
 COPY frontend /app
 RUN npm run build
