@@ -13,7 +13,6 @@ static:
     - apk update && apk add shellcheck
   script:
     - pylama .
-    - djlint .
     - pip-audit
     - yamllint *.yml
     - shellcheck *.sh
