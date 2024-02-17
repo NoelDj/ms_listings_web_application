@@ -8,6 +8,10 @@ export async function load({ params }) {
     return {"listing":data.listing}
 }
 
+interface DataObject {
+    [key: string]: { value?: string; missing?: boolean; incorrect?: boolean; exists?: boolean; errors?: Array<string>}
+}
+
 export const actions = {
     updateListing: async ({cookies, request, params}) => {
         const token = cookies.get('authToken')
@@ -31,6 +35,9 @@ export const actions = {
         const path = "listings/" + params.id
         const useFetch = new UserFetch(API_BASE_URL, token)
         const response = await useFetch.put(path, formData)
+        const data = await response.json()
+
+        console.log(data)
         
     } 
 }

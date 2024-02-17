@@ -23,8 +23,7 @@ export const actions = {
 
         const useFetch = new UserFetch(API_BASE_URL, token)
         const path = "listings/" + id
-        const response = await useFetch.delete(path)
+        await useFetch.delete(path)
 
-        return true;
     }
 };

@@ -1,7 +1,5 @@
 <script>
     export let data
-    
-    import { enhance } from '$app/forms';
     const {listings} = data.informationSet.results
 
 </script>

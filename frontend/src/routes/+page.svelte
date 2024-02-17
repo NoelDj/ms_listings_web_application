@@ -3,9 +3,8 @@
     import ListingsGrid from '../components/ListingsGrid.svelte';
     import { page } from '$app/stores';
     const searchParam = $page.url.searchParams.get('search') || ''
-    console.log(data)
     let informationSet = data.listings
-    const imageExists = (list) => list.length > 0
+    //const imageExists = (list) => list.length > 0
     const baseImagePath = data.baseUrl
 </script>
 

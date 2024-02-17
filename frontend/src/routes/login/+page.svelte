@@ -1,3 +1,6 @@
+<script>
+  export let form
+</script>
 
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
   <h1>Login</h1>
@@ -5,9 +8,11 @@
   <div class="mb-4">
     <form method="POST">
       <label class="block text-grey-darker text-sm font-bold mb-2" for="username">Email</label>
-      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" name="email" value="noel.klp@gmail.com">
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" name="email" value="{form?.email?.value || ''}">
+      {#if form?.email?.missing}<p class="error">The email field is required</p>{/if}
       <label class="block text-grey-darker text-sm font-bold mb-2" for="password">Password</label>
-      <input class="shadow appearance-none border rounded w-full py-2 px-3 mb-2 text-grey-darker" name="password" type="password" value="deXSA1234">
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 mb-2 text-grey-darker" name="password" type="password">
+      {#if form?.password?.missing || form?.password?.incorrect}<p class="error">Invalid credentials!</p>{/if}
       <div class="flex items-center justify-between">
         <button class="bg-sky-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="submit">
           Sign In

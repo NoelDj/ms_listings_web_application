@@ -41,6 +41,7 @@ class User(AbstractUser):
         user.is_superuser = True
         user.set_password(password)
         user.save()
+        return user
     
     def update_user(self, bio=None, image=None):
         if bio:
@@ -55,7 +56,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
-from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class Listing(models.Model):
     title = models.CharField(max_length=100, db_index=True)

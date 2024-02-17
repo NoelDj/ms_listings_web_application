@@ -2,7 +2,7 @@
     import ListingsGrid from '../../../components/ListingsGrid.svelte';
     export let data
 
-    const {bio, email, username} = data.user
+    const {bio, username} = data.user
     const informationSet = data.listings
     const baseImagePath = data.baseUrl
     

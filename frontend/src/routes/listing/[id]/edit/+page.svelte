@@ -1,6 +1,5 @@
 <script>
   //import UserFetch from '../../utils/userFetch';
-  import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
   import { createEventDispatcher } from 'svelte';
   export let data;

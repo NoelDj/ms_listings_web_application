@@ -73,9 +73,9 @@
     {#each listings as listing}
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         {#if imageExists(listing.images)}
-          <img class="w-full" src="{baseImagePath + listing.images[0].src}" style="height: 200px;object-fit: cover;" alt="Listing Image">
+          <img class="w-full" src="{baseImagePath + listing.images[0].src}" style="height: 200px;object-fit: cover;" alt="{listing.title} image">
         {:else}
-          <img class="w-full" src="/tower.PNG" alt="Default Image">
+          <img class="w-full" src="/tower.PNG" alt="{listing.title} image">
         {/if}
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">
@@ -123,7 +123,7 @@
           </a>
           {/if}
   
-          {#each pageNumbers as pageNumber, index}
+          {#each pageNumbers as pageNumber}
             {#if pageNumber == '...'}
               <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold select-none text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0">...</span>
             {:else}

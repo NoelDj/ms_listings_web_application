@@ -1,76 +1,143 @@
 # ls listings_app/tests.py | entr -pc python manage.py test
 # coverage run --source="." manage.py test
 # coverage report -m
-from django.test import TestCase, Client
-from .models import Listing
+from django.test import TestCase
+from .models import Listing, User, Category, Comment, Like, Image, FileAttachment
 
 
 class ListingTestCase(TestCase):
 
     def setUp(self):
-        Listing.create(title="a", text="some text")
-        Listing.create(title="b", text="some text")
-        Listing.create(title="c", text="some text")
-        Listing.create(title="video", text="make video")
-        Listing.create(title="", text="make video")
-        Listing.create(title="", text="make video")
-        Listing.create(title="s", text="make video")
-        Listing.create(title="r", text="make video")
-        Listing.create(title="Hello", text="some text")
+        user = User.create_user(username='test_user', email='new@example.com', password='password')
+        category = Category.objects.create(name='test_category')
+        images = ['test_files/image1.jpg', 'test_files/image2.jpg', 'test_files/image3.png', 'test_files/image4.jpg', 'test_files/image5jpg']
+        files = ['test_files/file1.txt', 'test_files/file2.pdf']
+        listing = Listing.create_listing(title='Test Listing', text='This is a test listing.', user=user, category=category, images=images, files=files)
+        Comment.create_comment(listing=listing, user=user, text='This is a test comment.')
+        Like.create_like(user=user, listing=listing)
 
-    def test_default_order(self):
-        listing_a = Listing.objects.get(title="a")
-        listing_b = Listing.objects.get(title="b")
-        assert listing_a.rank < listing_b.rank
+    def test_listing_creation(self):
+        listing = Listing.objects.get(id=1)
+        self.assertEqual(listing.title, 'Test Listing')
+        self.assertEqual(listing.text, 'This is a test listing.')
+        
+        images_exist = Image.objects.filter(listing=listing).exists()
+        self.assertTrue(images_exist, "Images do not exist for the listing")
+        
+        files_exist = FileAttachment.objects.filter(listing=listing).exists()
+        self.assertTrue(files_exist, "Files do not exist for the listing")
 
-    def test_highest_rank(self):
-        highest_rank = Listing.objects.get(title="Hello")
-        assert highest_rank.rank == Listing.highest_rank
 
-    def test_rerank_up(self):
-        rerank_listing = Listing.objects.get(title="video")
-        rerank_listing.rerank(1)
-        rerank_listing.refresh_from_db()
-        listing_a = Listing.objects.get(title="a")
-        assert rerank_listing.rank == 1 and listing_a.rank == 2
+    def test_update_listing(self):
 
-    def test_rerank_down(self):
-        listing_a = Listing.objects.get(title="a")
-        listing_a.rerank(4)
-        listing_a.refresh_from_db()
-        assert listing_a.rank == 4
-        listing_c = Listing.objects.get(title="c")
-        assert listing_c.rank == 2
+        listing = Listing.objects.get(id=1)
 
-    def test_rerank_by_list(self):
-        reranked = [listing.pk for listing in Listing.objects.all()]
-        first = reranked[0]
-        last = reranked[len(reranked) - 1]
-        Listing.rerank_by_list(reranked)
-        assert Listing.objects.get(pk=first).rank == 1
-        assert Listing.objects.get(pk=last).rank == 9
+        new_images = ['test_files/image6.jpg', 'test_files/image7.gif']
+        new_files = ['test_files/file2.pdf']
+        remove_images = [1, 2, 3]
+        remove_files = [1]
+       
+        listing.update_listing(images=new_images, remove_images=remove_images, files=new_files, remove_files=remove_files)
 
-    def test_empty_fields(self):
-        empty_title = Listing.objects.filter(title="")[0]
-        assert empty_title.text == "make video"
+        for image in new_images:
+            self.assertTrue(listing.images.filter(src=image).exists())
 
-    def test_load_index(self):
-        c = Client()
-        response = c.get("/")
-        self.assertTemplateUsed(response, 'listings_app/index.html')
-        assert response.status_code == 200
-        assert response['content-type'] == 'text/html; charset=utf-8'
+        for file in new_files:
+            self.assertTrue(listing.files.filter(file=file).exists())
 
-    def test_load_item(self):
-        listing_a = Listing.objects.get(title="a").pk
-        c = Client()
-        response = c.get(f'/listing_details_partial/{listing_a}/')
-        assert b'b' in response.content
-        assert response.status_code == 200
+        for image_id in remove_images:
+            self.assertFalse(listing.images.filter(id=image_id).exists())
 
-    def test_add_item(self):
-        c = Client(HTTP_HX_CURRENT_URL="/")
-        response = c.post('/create', {"title": "new", "text": "Test todo"})
-        assert response.status_code == 200
-        response = c.get("/listing_details_partial/10/")
-        assert b'new' in response.content
+        for file_id in remove_files:
+            self.assertFalse(listing.files.filter(id=file_id).exists())
+
+    def test_delete_listing(self):
+        listing = Listing.objects.get(id=1)
+        listing.delete_listing()
+        with self.assertRaises(Listing.DoesNotExist):
+            Listing.objects.get(id=1)
+
+    def test_filter_listings(self):
+        filtered_listings = Listing.filter_listings(search_param='Test')
+        self.assertEqual(filtered_listings.count(), 1)
+        
+        user = User.create_user(username='test_user2', email='test2@example.com', password='testing_password')
+        category = Category.objects.create(name='another_category')
+        Listing.objects.create(title='Another Test Listing', text='This is another test listing.', owner=user, category=category)
+        
+        filtered_listings = Listing.filter_listings(search_param='Test', owner_param=user, category_param=category)
+        self.assertEqual(filtered_listings.count(), 1)
+
+        filtered_listings = Listing.filter_listings(search_param='Test', owner_param=user)
+        self.assertEqual(filtered_listings.count(), 1)
+
+        filtered_listings = Listing.filter_listings(category_param=category)
+        self.assertEqual(filtered_listings.count(), 1)
+
+        filtered_listings = Listing.filter_listings(owner_param=user)
+        self.assertEqual(filtered_listings.count(), 1)
+
+    def test_comment_creation(self):
+        comment = Comment.objects.get(id=1)
+        self.assertEqual(comment.text, 'This is a test comment.')
+
+    def test_update_comment(self):
+        comment = Comment.objects.get(id=1)
+        comment.update_comment(text='Updated comment text.')
+        updated_comment = Comment.objects.get(id=1)
+        self.assertEqual(updated_comment.text, 'Updated comment text.')
+
+    def test_delete_comment(self):
+        comment = Comment.objects.get(id=1)
+        comment.delete_comment()
+        with self.assertRaises(Comment.DoesNotExist):
+            Comment.objects.get(id=1)
+
+    def test_get_comments_for_listing(self):
+        listing = Listing.objects.get(id=1)
+        Comment.objects.create(listing=listing, user=User.objects.get(id=1), text='Another comment.')
+        comments = Comment.get_comments_for_listing(listing_id=1)
+        self.assertEqual(comments.count(), 2)
+
+    def test_like_creation(self):
+        like = Like.objects.get(id=1)
+        self.assertEqual(like.user.username, 'test_user')
+        self.assertEqual(like.listing.title, 'Test Listing')
+
+    def test_user_likes_listing(self):
+        user = User.objects.get(username='test_user')
+        listing = Listing.objects.get(title='Test Listing')
+        self.assertTrue(Like.user_likes_listing(user=user, listing=listing))
+
+    def test_delete_like(self):
+        like = Like.objects.get(id=1)
+        like.delete()
+        with self.assertRaises(Like.DoesNotExist):
+            Like.objects.get(id=1)
+
+    def test_create_user_method(self):
+        user = User.create_user(username='new_user', email='test@example.com', password='password')
+        self.assertEqual(user.username, 'new_user')
+        self.assertEqual(user.email, 'test@example.com')
+        self.assertTrue(user.check_password('password'))
+
+    def test_create_super_user_method(self):
+        user = User.create_super_user(username='super_user', email='super@example.com', password='password', bio='Super bio')
+        self.assertEqual(user.username, 'super_user')
+        self.assertEqual(user.email, 'super@example.com')
+        self.assertEqual(user.bio, 'Super bio')
+        self.assertTrue(user.is_staff)
+        self.assertTrue(user.is_superuser)
+        self.assertTrue(user.check_password('password'))
+
+    def test_update_user_method(self):
+        user = User.objects.get(id=1)
+        user.update_user(bio='Updated bio')
+        updated_user = User.objects.get(id=1)
+        self.assertEqual(updated_user.bio, 'Updated bio')
+
+    def test_delete_user_method(self):
+        user = User.objects.get(id=1)
+        user.delete_user()
+        with self.assertRaises(User.DoesNotExist):
+            User.objects.get(id=1)

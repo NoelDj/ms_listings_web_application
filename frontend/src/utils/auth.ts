@@ -24,7 +24,7 @@ export const isValid = (token) => {
     return isExpired
 }
 
-export const isExpired = (token: string): Boolean => {
+export const isExpired = (token: string): boolean => {
     const decode = jwtDecode(token)
     const isExpired = dayjs.unix(decode.exp).diff(dayjs()) <= 0
     return isExpired

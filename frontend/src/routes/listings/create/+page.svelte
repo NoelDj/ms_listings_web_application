@@ -1,28 +1,25 @@
-<script>
+<script lang="ts">
     //import UserFetch from '../../utils/userFetch';
-    import { goto } from '$app/navigation';
-    import { onMount } from 'svelte';
-    import { createEventDispatcher } from 'svelte';
-    export let data;
+    import { onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
+    export let data
+    export let form
   
-    //const { username, email } = data.decode;
-    //const token = data.token;
+    let content = form?.title?.value || ''
   
-    let content = '';
-  
-    const dispatch = createEventDispatcher();
-    let editor;
+    const dispatch = createEventDispatcher()
+    let editor
   
     export let toolbarOptions = [
-      [{ header: 1 }, { header: 2 }, "blockquote", "link", "image", "video"],
+      [{ header: 1 }, { header: 2 }, "blockquote", "link"],
       ["bold", "italic", "underline", "strike"],
-      [{ list: "ordered" }, { list: "ordered" }],
+      [{ list: "bullet" }, { list: "ordered" }],
       [{ align: [] }],
       ["clean"]
-    ];
+    ]
   
     onMount(async () => {
-      const { default: Quill } = await import("quill");
+      const { default: Quill } = await import("quill")
   
       let quill = new Quill(editor, {
         modules: {
@@ -35,8 +32,8 @@
       quill.on('text-change', () => {
         content = quill.root.innerHTML;
         dispatch('contentChange', content);
-      });
-    });
+      })
+    })
 </script>
 
 <style>
@@ -49,7 +46,8 @@
         <form method="POST" enctype="multipart/form-data">
             <input type="hidden" name="text" value={content} id="">
             <label class="block text-grey-darker text-sm font-bold mb-2" for="title">Title</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="title" type="text" name="title" value="A Listing">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="title" type="text" name="title" value="{form?.title?.value || ''}">
+            {#if form?.title?.missing }<p class="error">Please enter a title</p>{/if}
             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
             <select name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option selected value="1">Builds</option>
@@ -62,12 +60,13 @@
                     <div class="h-40" bind:this={editor} />
                 </div>
             </div>
+            {#if form?.text?.missing }<p class="error">Please enter text</p>{/if}
             <p></p>
             <div>
                 <label for="Images">Images</label>
                 <input type="file" name="images" id="" multiple>
             </div>
-            <br>
+            {#if form?.images?.missing }<p class="error">Please upload an image</p>{/if}
             <div>
                 <label for="files">Files</label>
                 <input type="file" name="files" id="" multiple>

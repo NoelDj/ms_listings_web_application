@@ -3,6 +3,8 @@ import { API_BASE_URL, BASE_URL } from '$env/static/private';
 import { isValid } from '../../../utils/auth';
 import UserFetch from '../../../utils/userFetch';
 import { jwtDecode } from 'jwt-decode';
+import { fail } from '@sveltejs/kit';
+
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, request, cookies }) {
@@ -49,16 +51,34 @@ export async function load({ params, request, cookies }) {
   }
 }
 
+interface DataObject {
+  [key: string]: { value?: string; missing?: boolean; incorrect?: boolean }
+}
+
 export const actions = {
-	postComment: async ({event, request, cookies}) => {
+	postComment: async ({request, cookies}) => {
     const token = cookies.get('authToken')
     const formData = await request.formData()
+    const commentValue:string = formData.get('authToken')
+    
     const useFetch = new UserFetch(`${API_BASE_URL}`, token)
     const response = await useFetch.postForm('comments', formData)
     const data = await response.json()
     
-    const isAuthenticated = isValid(token)
-    
+    const dataObject: DataObject = {
+      comment: { value: commentValue || '' }
+    }
+
+    if (!response.ok) {
+      if (data.message.text[0]) {
+          dataObject.comment.missing = true
+      }
+
+      if (Object.values(dataObject).some(field => field.missing || field.incorrect)) {
+          return fail(400, dataObject);
+      }
+  }
+       
 	},
   deleteComment: async ({request, cookies}) => {
     const token = cookies.get('authToken')
@@ -66,14 +86,14 @@ export const actions = {
     const commentId = formData.get('comment_id')
     const useFetch = new UserFetch(`${API_BASE_URL}`, token)
     const response = await useFetch.delete(`comments/${commentId}`)
-    const data = await response.json()
+    //const data = await response.json()
   },
   likeListing: async ({request, cookies}) => {
     const token = cookies.get('authToken')
     const formData = await request.formData()
     const useFetch = new UserFetch(`${API_BASE_URL}`, token)
     const response = await useFetch.postForm('likes', formData)
-    const data = await response.json()
+    //const data = await response.json()
   },
   deleteLike: async ({request, cookies}) => {
     const token = cookies.get('authToken')

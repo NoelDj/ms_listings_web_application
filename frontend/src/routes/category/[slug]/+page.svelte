@@ -1,7 +1,7 @@
 <script>
     import ListingsGrid from '../../../components/ListingsGrid.svelte';
     export let data
-    const {id,name,description} = data.category
+    const {name, description} = data.category
     const informationSet = data.listings
     const baseImagePath = data.baseUrl
 </script>

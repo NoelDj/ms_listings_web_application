@@ -1,8 +1,7 @@
 <script>
-
-    import {onMount} from 'svelte'
-
     export let data
+    export let form
+
     const {isAuthenticated} = data
     const userId = data.userId
     const {isLiked} = data
@@ -19,6 +18,8 @@
     const imagePath = baseImagePath + listingImage
     
     const images = data.listing.images
+
+    const unslugify = (slug) => slug.replace(/-/g, " ").replace(/\w\S*/g, (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase())
 
 </script>
 
@@ -54,7 +55,7 @@
             {/if}
           </div>
         </div>
-        <img src="{imagePath}" class="w-full object-cover lg:rounded" style="height: 28em;"/>
+        <img src="{imagePath}" alt="{title} thumbnail" class="w-full object-cover lg:rounded" style="height: 28em;"/>
       </div>
       
 
@@ -68,11 +69,10 @@
         <div class="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
           <div class="p-4 border-t border-b md:border md:rounded">
             <div class="flex py-2">
-              <img src="{baseImagePath + image}"
-                class="h-10 w-10 rounded-full mr-2 object-cover" />
+              <img src="{baseImagePath + image}" alt="{username} profile image" class="h-10 w-10 rounded-full mr-2 object-cover" />
               <div>
-                <p class="font-semibold text-gray-700 text-sm"> <a href="/user/{username}">{username}</a></p>
-                <p class="font-semibold text-gray-600 text-xs"> <a href="mailto:{email}">{email}</a></p>
+                <p class="font-semibold text-gray-700 text-sm"><a href="/user/{username}">{username}</a></p>
+                <p class="font-semibold text-gray-600 text-xs"><a href="mailto:{email}">{email}</a></p>
               </div>
             </div>
             <p class="text-gray-700 py-3">{bio}</p>
@@ -90,7 +90,7 @@
       <div class="flex gap-2 mt-2">
         {#each images as image, index (index)}
           {#if index !== 0}
-            <div><img src="{baseImagePath + image.src}" style="height: 200px;"></div>
+            <div><img src="{baseImagePath + image.src}" alt="{unslugify(image.src)}" style="height: 200px;"></div>
           {/if}
         {/each}
       </div>
@@ -104,6 +104,7 @@
                   placeholder="Write a comment..." name="text" required></textarea>
           </div>
           <input type="hidden" value="{id}" name="listing">
+          {#if form?.comment?.missing}<p class="error">Please enter comment</p>{/if}
           <button type="submit"
               class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">
               Post comment
@@ -119,7 +120,6 @@
               <div class="flex flex-col w-full">
                   <div class="flex flex-row justify-between">
                       <p class="relative text-xl whitespace-nowrap truncate overflow-hidden"><a href="/user/{comment.user.username}">{comment.user.username}</a></p>
-                      <a class="text-gray-500 text-xl" href="#"><i class="fa-solid fa-trash"></i></a>
                   </div>
                   <div class="flex gap-3 align-center">
                     <p class="text-gray-400 text-sm">{comment.created_at}</p>

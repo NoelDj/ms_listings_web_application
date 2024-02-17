@@ -9,26 +9,27 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.pagination import PageNumberPagination
 import os
 
-def validate_uploads(uploads, max_uploads, allowed_file_types, allowed_file_size):
+def validate_uploads(uploads, max_uploads, allowed_file_types, required=True):
     
     errors = []
+
+    print(uploads)
+    print(len(uploads))
+
+    if required and len(uploads) == 0:
+        return Response({'error': 'No file uploaded'}, status=status.HTTP_400_BAD_REQUEST)
 
     if len(uploads) > max_uploads:
         return Response({'error': f'Maximum of {max_uploads} images are allowed'}, status=status.HTTP_400_BAD_REQUEST)
 
 
     for upload in uploads:
+        filename, file_extension = os.path.splitext(str(upload))
         try:
-            filename, file_extension = os.path.splitext(str(upload))
-
-            print(f'Checking file: {filename}{file_extension}')
-
-            if file_extension not in allowed_file_types:
-                errors.append(f'File type not allowed for file: {filename}{file_extension}')
-
-            # Rest of your validation code
+            if file_extension.lower() not in allowed_file_types:
+                errors.append(f'File type not allowed for extension: {file_extension}')
+                
         except Exception as e:
-            # Handle other unexpected errors
             print(f'An unexpected error occurred for file: {filename}{file_extension}')
             errors.append(f'An unexpected error occurred for file: {filename}{file_extension}')
 
@@ -165,15 +166,15 @@ def listings_collection(request):
         category = Category.objects.get(pk=category_id)
         serializer = ListingSerializer(data=request.data, context={'request': request})
         
-        images = request.data.getlist('images')
-        files = request.data.getlist('files')
+        images = request.data.getlist('images', []) 
+        files = request.data.getlist('files', [])
 
-        validation_result_images = validate_uploads(images, max_uploads=2, allowed_file_types = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.webp', '.eps'], allowed_file_size=3000)
+        validation_result_images = validate_uploads(images, max_uploads=10, allowed_file_types = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.webp', '.eps'])
 
         if validation_result_images:
             return validation_result_images
         
-        validation_result_files = validate_uploads(files, max_uploads=2, allowed_file_types=['.txt', '.pdf'], allowed_file_size=3000)
+        validation_result_files = validate_uploads(files, max_uploads=10, allowed_file_types=['.txt', '.pdf'], required=False)
 
         if validation_result_files:
             return validation_result_files

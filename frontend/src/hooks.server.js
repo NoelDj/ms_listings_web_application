@@ -1,4 +1,4 @@
-import { isValid, refreshAuthToken, setCookies, isExpiring, isExpired } from "./utils/auth"
+import { isValid, refreshAuthToken, setCookies, isExpired } from "./utils/auth"
 import { API_BASE_URL } from "$env/static/private";
 import { redirect } from "@sveltejs/kit";
 

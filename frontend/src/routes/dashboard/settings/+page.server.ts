@@ -11,7 +11,7 @@ export const load = async ({cookies}) => {
 }
 
 export const actions = {
-    updateUser: async ({cookies, request, params}) => {
+    updateUser: async ({cookies, request}) => {
         
         const token = cookies.get('authToken')
         const user = getUser(token)

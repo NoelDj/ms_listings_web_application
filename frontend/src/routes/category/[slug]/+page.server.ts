@@ -1,4 +1,4 @@
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { API_BASE_URL, BASE_URL } from '$env/static/private';
 
 export async function load({ params, url }) {
@@ -38,7 +38,7 @@ export async function load({ params, url }) {
     const category = dataCategory.category
     const baseUrl = BASE_URL
 
-    let listings = dataListings
+    const listings = dataListings
     return {
         category,
         listings,
