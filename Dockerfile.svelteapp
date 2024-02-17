@@ -3,7 +3,6 @@ WORKDIR /app
 COPY frontend/package.json /app/
 RUN apk add --no-cache git
 RUN npm install
-RUN echo $PATH
 COPY frontend /app
 RUN npm run build
 
