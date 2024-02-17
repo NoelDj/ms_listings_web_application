@@ -35,11 +35,8 @@ services:
     volumes:
       - media:/media/
       - static:/static/
-#      - ./nginx/:/etc/nginx/conf.d/
-#      - /home/Noelk/certs/:/etc/nginx/certs/
     ports:
       - 80:80
-#      - 443:443
     depends_on:
       - svelteapp
 

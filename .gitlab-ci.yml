@@ -11,7 +11,7 @@ static:
     - pip install --upgrade pip
     - pip install -r sqa-requirements.txt
     - apk update && apk add shellcheck nodejs npm
-    - npm install eslint
+    - npm install eslint eslint-plugin-@typescript-eslint/eslint-plugin
   script:
     - pylama ./backend
     - pip-audit
