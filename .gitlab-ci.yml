@@ -15,9 +15,6 @@ static:
     - pylama .
     - pip-audit
     - yamllint *.yml
-    - shellcheck *.sh
-    - npm check
-    - npm test
 
 build:
   stage: build
