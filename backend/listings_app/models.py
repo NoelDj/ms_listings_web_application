@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models import Q
-from django.core.validators import FileExtensionValidator,MaxValueValidator, MinValueValidator
+from django.core.validators import FileExtensionValidator
+
 
 class User(AbstractUser):
     username = models.CharField(max_length=256)
