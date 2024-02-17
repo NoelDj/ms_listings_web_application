@@ -14,3 +14,4 @@ html-sanitizer==2.2.0
 pillow==10.2.0
 Faker==22.7.0
 django-jazzmin==2.6.0
+coverage==6.3.2
