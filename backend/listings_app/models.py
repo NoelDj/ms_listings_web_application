@@ -32,11 +32,7 @@ class User(AbstractUser):
     @classmethod
     def create_super_user(cls, username, email, password, bio):
         email = cls.objects.normalize_email(email)
-        user = cls.objects.create(
-            username=username,
-            email=email,
-            bio = bio
-        )
+        user = cls.objects.create(username=username,email=email,bio = bio)
         user.is_staff = True
         user.is_superuser = True
         user.set_password(password)
@@ -145,7 +141,6 @@ class Listing(models.Model):
 
         return queryset
 
-
     def delete_listing(self):
         self.delete()
 
@@ -194,7 +189,7 @@ class Like(models.Model):
     @classmethod
     def create_like(cls, user, listing):
         return cls.objects.create(user=user, listing=listing)
-    
+
     def delete_listing(self):
         self.delete()
 
