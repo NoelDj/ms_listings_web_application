@@ -20,18 +20,16 @@ class ListingTestCase(TestCase):
         listing = Listing.objects.get(id=1)
         self.assertEqual(listing.title, 'Test Listing')
         self.assertEqual(listing.text, 'This is a test listing.')
-        
+   
         images_exist = Image.objects.filter(listing=listing).exists()
         self.assertTrue(images_exist, "Images do not exist for the listing")
-        
+
         files_exist = FileAttachment.objects.filter(listing=listing).exists()
         self.assertTrue(files_exist, "Files do not exist for the listing")
 
 
     def test_update_listing(self):
-
         listing = Listing.objects.get(id=1)
-
         new_images = ['test_files/image6.jpg', 'test_files/image7.gif']
         new_files = ['test_files/file2.pdf']
         remove_images = [1, 2, 3]
@@ -60,11 +58,11 @@ class ListingTestCase(TestCase):
     def test_filter_listings(self):
         filtered_listings = Listing.filter_listings(search_param='Test')
         self.assertEqual(filtered_listings.count(), 1)
-        
+
         user = User.create_user(username='test_user2', email='test2@example.com', password='testing_password')
         category = Category.objects.create(name='another_category')
         Listing.objects.create(title='Another Test Listing', text='This is another test listing.', owner=user, category=category)
-        
+
         filtered_listings = Listing.filter_listings(search_param='Test', owner_param=user, category_param=category)
         self.assertEqual(filtered_listings.count(), 1)
 

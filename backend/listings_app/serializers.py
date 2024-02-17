@@ -11,9 +11,11 @@ def validate_field(value, min_length, max_length, field_name):
     sanitized_text = sanitizer.sanitize(value)
 
     if len(value) < min_length or len(value) > max_length:
-        raise serializers.ValidationError({field_name: f'{field_name} Must be between {min_length} and {max_length} characters long.'})
+        raise serializers.ValidationError(
+            {field_name: f'{field_name} Must be between {min_length} and {max_length} characters long.'})
 
     return sanitized_text
+
 
 class TokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -33,13 +35,20 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password', 'password2', 'image', 'bio')
-        
+        fields = (
+            'id',
+            'username',
+            'email',
+            'password',
+            'password2',
+            'image',
+            'bio')
 
     def validate(self, attrs):
         instance = self.instance
         if instance is None:
-            existing_user = User.objects.filter(username__iexact=attrs['username']).exists()
+            existing_user = User.objects.filter(
+                username__iexact=attrs['username']).exists()
             if existing_user:
                 raise serializers.ValidationError(
                     {"username": "A user with this username already exists."})
@@ -59,7 +68,6 @@ class UserSerializer(serializers.ModelSerializer):
             password=validated_data['password'],
         )
         return user
-    
 
     def update(self, instance, validated_data):
         bio = validated_data.get('bio')
@@ -81,7 +89,7 @@ class CommentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         comment = Comment.create_comment(**validated_data)
         return comment
-    
+
     def update(self, instance, validated_data):
         instance.update_comment(**validated_data)
         return instance
@@ -92,11 +100,11 @@ class CommentSerializer(serializers.ModelSerializer):
         extra_kwargs = {'listing': {'required': False, 'allow_null': True}}
 
 
-
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
 
 class FileAttachmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -109,7 +117,6 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = '__all__'
 
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 class ListingSerializer(serializers.ModelSerializer):
     owner = UserSerializer(read_only=True)
@@ -117,25 +124,24 @@ class ListingSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, required=False)
     files = FileAttachmentSerializer(many=True, required=False)
     like_count = serializers.SerializerMethodField()
-    text = serializers.CharField(min_length=4, max_length=(15*2400))
+    text = serializers.CharField(min_length=4, max_length=(15 * 2400))
 
     class Meta:
         model = Listing
         fields = '__all__'
 
-    
     def get_like_count(self, obj):
         return obj.get_like_count
-    
+
     def validate(self, attrs):
         print(attrs)
         return attrs
-    
+
     def create(self, validated_data):
         validated_data.pop('is_featured', None)
         listing = Listing.create_listing(**validated_data)
         return listing
-    
+
     def update(self, instance, validated_data):
         print(validated_data)
         validated_data.pop('is_featured', None)

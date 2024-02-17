@@ -8,6 +8,7 @@ fake = Faker()
 
 User = get_user_model()
 
+
 class Command(BaseCommand):
     help = 'Generate dummy data for users, categories, and listings'
 
@@ -15,16 +16,18 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS('Creating categories'))
         self.create_categories()
-        #self.stdout.write(self.style.SUCCESS('Creating users'))
-        #self.create_dummy_users()
+        # self.stdout.write(self.style.SUCCESS('Creating users'))
+        # self.create_dummy_users()
 
-        
-
-        #self.stdout.write(self.style.SUCCESS('Creating dummy listings...'))
-        #self.create_dummy_listings()
+        # self.stdout.write(self.style.SUCCESS('Creating dummy listings...'))
+        # self.create_dummy_listings()
 
     def create_dummy_users(self, total_users=100):
-        User.create_super_user(username="noel", email="noel.klp@gmail.com", password="deXSA1234", bio="Interested in learning new stuff.")
+        User.create_super_user(
+            username="noel",
+            email="noel.klp@gmail.com",
+            password="deXSA1234",
+            bio="Interested in learning new stuff.")
 
         for _ in range(total_users):
             username = fake.user_name()
@@ -33,7 +36,11 @@ class Command(BaseCommand):
             bio = fake.text(max_nb_chars=100)
 
             if not User.objects.filter(email=email).exists():
-                User.create_user(username=username, email=email, password=password, bio=bio)
+                User.create_user(
+                    username=username,
+                    email=email,
+                    password=password,
+                    bio=bio)
 
     def create_categories(self):
         categories = [
@@ -43,7 +50,9 @@ class Command(BaseCommand):
             {'category_name': 'documents', 'description': 'Documentation and written materials related to project planning and execution.'}
         ]
         for category in categories:
-            Category.objects.create(name=category['category_name'], description=category['description'])
+            Category.objects.create(
+                name=category['category_name'],
+                description=category['description'])
 
     def create_dummy_listings(self, total_listings=5200):
         users = User.objects.all()
@@ -55,7 +64,9 @@ class Command(BaseCommand):
             owner = random.choice(users)
             category = random.choice(categories)
 
-            listing = Listing.create_listing(title=title, text=text, owner=owner, category=category)
-            Image.objects.create(listing=listing,src='default.png')
+            listing = Listing.create_listing(
+                title=title, text=text, owner=owner, category=category)
+            Image.objects.create(listing=listing, src='default.png')
 
-        self.stdout.write(self.style.SUCCESS('Dummy data generation complete.'))
+        self.stdout.write(self.style.SUCCESS(
+            'Dummy data generation complete.'))

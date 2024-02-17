@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.sites import AlreadyRegistered
 from django.apps import apps
-from .models import User, Listing
+from .models import User
 
 
 class UserAdmin(admin.ModelAdmin):
