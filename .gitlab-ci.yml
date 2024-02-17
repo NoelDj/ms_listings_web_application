@@ -13,10 +13,10 @@ static:
     - apk update && apk add shellcheck nodejs npm
     - npm install eslint
   script:
-    - pylama .
+    - pylama ./backend
     - pip-audit
     - yamllint *.yml
-    - npx eslint .
+    - npx eslint ./frontend
     - shellcheck *.sh
 
 build:
