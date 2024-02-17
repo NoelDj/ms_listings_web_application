@@ -1,13 +1,12 @@
 import random
-from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from faker import Faker
 from listings_app.models import Category, Listing, User, Image
 
 fake = Faker()
 
+
 class Command(BaseCommand):
-    help = 'Generate dummy data for users, categories, and listings'
 
     def handle(self, *args, **kwargs):
 

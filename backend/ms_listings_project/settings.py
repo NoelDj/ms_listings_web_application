@@ -231,4 +231,3 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Think | Create | Inspire",
     "copyright": "www.desphixs.com",
 }
-
