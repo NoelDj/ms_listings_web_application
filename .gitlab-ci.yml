@@ -11,10 +11,12 @@ static:
     - pip install --upgrade pip
     - pip install -r sqa-requirements.txt
     - apk update && apk add shellcheck
+    - npm install eslint
   script:
     - pylama .
     - pip-audit
     - yamllint *.yml
+    - npx eslint .
     - shellcheck *.sh
 
 build:
