@@ -1,4 +1,6 @@
 <script lang="ts">
+    import DOMPurify from 'dompurify';
+
     export let data
     export let form
 
@@ -7,6 +9,7 @@
     const {isLiked} = data
     const {likeId} = data
     const {title, text, created_at, id, like_count} = data.listing
+    const textContent = DOMPurify.sanitize(text)
     const {username, email, bio, image} = data.listing.owner
     const {name} = data.listing.category
     const files = data.listing.files
@@ -23,14 +26,11 @@
 
 </script>
 
-
-
     <div class="my-16">
-
       <div class="mb-4 md:mb-0 w-full mx-auto relative">
         <div class="px-4 lg:px-0">
           <h2 class="text-4xl font-semibold text-gray-800 leading-tight">
-            {title}
+            {textContent}
           </h2>
           <div class="flex gap-3 my-3">
             <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">Likes: {like_count}</span>
@@ -57,15 +57,11 @@
         </div>
         <img src="{imagePath}" alt="{title} thumbnail" class="w-full object-cover lg:rounded" style="height: 28em;"/>
       </div>
-      
 
       <div class="flex flex-col lg:flex-row lg:space-x-12">
-
         <article class="article px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4">
-          {@html `${text}`}
+          {@html `${textContent}`}
         </article>
-
-
         <div class="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
           <div class="p-4 border-t border-b md:border md:rounded">
             <div class="flex py-2">
@@ -136,4 +132,4 @@
       </div>
       {/each}
     </div>
-    </div>
+</div>
