@@ -32,7 +32,7 @@ class User(AbstractUser):
     @classmethod
     def create_super_user(cls, username, email, password, bio):
         email = cls.objects.normalize_email(email)
-        user = cls.objects.create(username=username,email=email,bio = bio)
+        user = cls.objects.create(username=username, email=email, bio=bio)
         user.is_staff = True
         user.is_superuser = True
         user.set_password(password)
@@ -68,8 +68,19 @@ class Listing(models.Model):
         return Like.objects.filter(listing=self).count()
 
     @classmethod
-    def create_listing(cls, title, text, user, category=None, images=None, files=None):
-        listing = cls.objects.create(title=title, text=text, owner=user, category=category)
+    def create_listing(
+            cls,
+            title,
+            text,
+            user,
+            category=None,
+            images=None,
+            files=None):
+        listing = cls.objects.create(
+            title=title,
+            text=text,
+            owner=user,
+            category=category)
 
         if images:
             Image.objects.bulk_create([
@@ -89,7 +100,14 @@ class Listing(models.Model):
     def get_listing_by_id(cls, listing_id):
         return cls.objects.get(id=listing_id)
 
-    def update_listing(self, title=None, text=None, images=None, remove_images=None, files=None, remove_files=None):
+    def update_listing(
+            self,
+            title=None,
+            text=None,
+            images=None,
+            remove_images=None,
+            files=None,
+            remove_files=None):
         if title:
             self.title = title
         if text:
@@ -129,11 +147,16 @@ class Listing(models.Model):
         return self
 
     @classmethod
-    def filter_listings(cls, search_param=None, owner_param=None, category_param=None):
+    def filter_listings(
+            cls,
+            search_param=None,
+            owner_param=None,
+            category_param=None):
         queryset = cls.objects.all()
 
         if search_param:
-            queryset = queryset.filter(Q(title__icontains=search_param) | Q(text__icontains=search_param))
+            queryset = queryset.filter(
+                Q(title__icontains=search_param) | Q(text__icontains=search_param))
         if owner_param:
             queryset = queryset.filter(owner=owner_param)
         if category_param:
@@ -202,7 +225,13 @@ class Like(models.Model):
 
 
 class Image(models.Model):
-    listing = models.ForeignKey('Listing', related_name='images', on_delete=models.CASCADE, validators=[FileExtensionValidator(['png'])])
+    listing = models.ForeignKey(
+        'Listing',
+        related_name='images',
+        on_delete=models.CASCADE,
+        validators=[
+            FileExtensionValidator(
+                ['png'])])
     src = models.ImageField(upload_to='listing_images/', default="default.png")
     description = models.CharField(max_length=256, default="")
     uploaded_at = models.DateTimeField(auto_now_add=True)
@@ -210,7 +239,10 @@ class Image(models.Model):
 
 
 class FileAttachment(models.Model):
-    listing = models.ForeignKey('Listing', related_name='files', on_delete=models.CASCADE)
+    listing = models.ForeignKey(
+        'Listing',
+        related_name='files',
+        on_delete=models.CASCADE)
     file = models.FileField(upload_to='listing_attachments/')
     description = models.TextField(max_length=256, default='')
     created_at = models.DateTimeField(auto_now_add=True)

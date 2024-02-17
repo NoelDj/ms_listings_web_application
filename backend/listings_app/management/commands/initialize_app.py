@@ -6,9 +6,6 @@ from listings_app.models import Category, Listing, User, Image
 
 fake = Faker()
 
-User = get_user_model()
-
-
 class Command(BaseCommand):
     help = 'Generate dummy data for users, categories, and listings'
 

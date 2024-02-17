@@ -31,7 +31,7 @@ def validate_uploads(uploads, max_uploads, allowed_file_types, required=True):
                 errors.append(
                     f'File type not allowed for extension: {file_extension}')
 
-        except Exception as e:
+        except Exception:
             print(
                 f'An unexpected error occurred for file: {filename}{file_extension}')
             errors.append(
@@ -334,9 +334,8 @@ def categories_collection(request):
 
     return Response({}, status.HTTP_400_BAD_REQUEST)
 
+
 # likes
-
-
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def likes_collection(request):

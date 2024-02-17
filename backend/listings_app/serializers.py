@@ -3,7 +3,6 @@ from .models import Listing, User, Image, Category, Comment, Like, FileAttachmen
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from html_sanitizer import Sanitizer
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 def validate_field(value, min_length, max_length, field_name):
