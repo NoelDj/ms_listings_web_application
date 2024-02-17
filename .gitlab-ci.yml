@@ -22,9 +22,9 @@ lint:
   stage: staticjavascript
   image: node
   before_script:
-    - npm install eslint eslint-plugin-svelte @typescript-eslint/eslint-plugin
+    - cd frontend && npm i
   script:
-    - node_modules/.bin/eslint ./frontend
+    - npx eslint .
 
 build:
   stage: build
