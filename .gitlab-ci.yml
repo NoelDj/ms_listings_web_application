@@ -30,10 +30,11 @@ build:
     - cp "$env" frontend/.env
     - apk add git
   script:
-    - docker build --pull --push -t "$CI_REGISTRY_IMAGE/djangoapp:latest" -f Dockerfile.djangoapp .
-    - docker build --pull --push -t "$CI_REGISTRY_IMAGE/svelteapp:latest" -f Dockerfile.svelteapp .
+    - docker build --pull --push -v -t "$CI_REGISTRY_IMAGE/djangoapp:latest" -f Dockerfile.djangoapp .
+    - echo "$CI_REGISTRY_IMAGE/svelteapp:latest"
+    - docker build --pull --push -v -t "$CI_REGISTRY_IMAGE/svelteapp:latest" -f Dockerfile.svelteapp .
     - export RTE=test
-    - docker-compose up --abort-on-container-exit --exit-code-from djangoapp
+    - docker-compose up --abort-on-container-exit --exit-code-from djangoapp -v
 
 deploy:
   stage: deploy
