@@ -41,7 +41,7 @@ build:
   script:
     - docker build --pull --push -t "$CI_REGISTRY_IMAGE/djangoapp:latest" -f Dockerfile.djangoapp .
     - echo "$CI_REGISTRY_IMAGE/svelteapp:latest"
-    - docker build --pull --push -t "registry.gitlab.com/noel100/ms_listings_web_application/svelteapp:latest" -f Dockerfile.svelteapp .
+    - docker build --verbose --pull --push -t "registry.gitlab.com/noel100/ms_listings_web_application/svelteapp:latest" -f Dockerfile.svelteapp .
     - export RTE=test
     - docker-compose up --abort-on-container-exit --exit-code-from djangoapp
 
