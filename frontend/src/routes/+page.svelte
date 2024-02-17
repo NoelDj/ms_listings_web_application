@@ -2,6 +2,7 @@
     export let data
     import ListingsGrid from '../components/ListingsGrid.svelte';
     import { page } from '$app/stores';
+    console.log(data)
     const searchParam = $page.url.searchParams.get('search') || ''
     let informationSet = data.listings
     //const imageExists = (list) => list.length > 0
