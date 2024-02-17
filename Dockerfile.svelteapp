@@ -1,13 +1,14 @@
-FROM node:lts-alpine as build
+FROM node:lts-alpine AS build
 
 WORKDIR /app
 
-COPY frontend/package.json ./
-COPY frontend/package-lock.json ./
+COPY frontend/package.json frontend/package-lock.json ./
 
-RUN apk add --no-cache git && npm install
+RUN apk --no-cache add --virtual .gyp python make g++ git
+RUN npm install --only=production
 
-COPY frontend /app
+COPY frontend/ .
+
 RUN npm run build
 
 FROM node:lts-alpine AS production
@@ -15,8 +16,7 @@ FROM node:lts-alpine AS production
 WORKDIR /app
 
 COPY --from=build /app/build ./build
-COPY --from=build /app/package.json ./
-COPY --from=build /app/package-lock.json ./
+COPY --from=build /app/package.json /app/package-lock.json ./
 
 RUN npm ci --only=production
 
