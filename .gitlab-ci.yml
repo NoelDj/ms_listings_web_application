@@ -26,8 +26,8 @@ build:
     DOCKER_DRIVER: overlay2
   before_script:
     - docker login -u gitlab-ci-token -p "$GITLAB_CI_TOKEN" "$CI_REGISTRY"
-    - cp ${env_test} env_test
-    - cp ${env} frontend/.env
+    - cp "$env_test" env_test
+    - cp "$env" frontend/.env
   script:
     - docker build --pull --push -t "$CI_REGISTRY_IMAGE/djangoapp:latest" -f Dockerfile.djangoapp .
     - docker build --pull --push -t "$CI_REGISTRY_IMAGE/svelteapp:latest" -f Dockerfile.svelteapp .
