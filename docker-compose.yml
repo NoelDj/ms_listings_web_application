@@ -11,7 +11,7 @@ services:
       - "env_$RTE"
 
   djangoapp:
-    image: registry.gitlab.com/noel100/ms_listings_app/djangoapp:latest
+    image: registry.gitlab.com/noel100/ms_listings_web_application/svelteapp:latest
     volumes:
       - media:/media/
       - static:/static/
@@ -23,7 +23,7 @@ services:
       - 8000:8000
 
   svelteapp:
-    image: registry.gitlab.com/noel100/ms_listings_app/svelteapp:latest
+    image: registry.gitlab.com/noel100/ms_listings_application/svelteapp:latest
     volumes:
       - media:/media/
       - static:/static/
