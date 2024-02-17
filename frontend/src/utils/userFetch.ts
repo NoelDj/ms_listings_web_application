@@ -4,7 +4,7 @@ class UserFetch {
         this.token = token
     }
 
-    async get(path) {
+    async get(path:string) {
         const response = await fetch(`${this.baseUrl}/${path}`, {
             method : "GET",
             headers: {
@@ -15,7 +15,7 @@ class UserFetch {
         return response
     }
 
-    async post(path, body) {
+    async post(path:string, body) {
         const response = await fetch(`${this.baseUrl}/${path}`, {
             method : "POST",
             headers: {
@@ -27,7 +27,7 @@ class UserFetch {
         return response
     }
 
-    async postForm(path, formData) {
+    async postForm(path:string, formData) {
         const response = await fetch(`${this.baseUrl}/${path}`, {
             method : "POST",
             headers: {
@@ -38,7 +38,7 @@ class UserFetch {
         return response
     }
 
-    async delete(path) {
+    async delete(path:string) {
         const response = await fetch(`${this.baseUrl}/${path}`, {
             method : "DELETE",
             headers: {
@@ -48,7 +48,7 @@ class UserFetch {
         return response
     }
 
-    async put(path, formData) {
+    async put(path:string, formData) {
         const response = await fetch(`${this.baseUrl}/${path}`, {
             method : "PUT",
             headers: {

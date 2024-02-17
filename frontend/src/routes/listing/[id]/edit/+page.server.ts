@@ -29,7 +29,7 @@ export const actions = {
         const path = "listings/" + params.id
         const useFetch = new UserFetch(API_BASE_URL, token)
         const response = await useFetch.put(path, formData)
-        const data = await response.json()
+        await response.json()
         
     } 
 }

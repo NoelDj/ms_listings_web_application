@@ -17,7 +17,7 @@ export async function fetchAuthToken(credentials) {
     return await response.json();
 }
 
-export const isValid = (token) => {
+export const isValid = (token:string) => {
     if (!token || token === undefined) return false
     const decode = jwtDecode(token)
     const isExpired = dayjs.unix(decode.exp).diff(dayjs()) > 1
@@ -58,7 +58,7 @@ export const setCookies = (event, tokens) => {
     });
 }
 
-export const getUser = (token) => {
+export const getUser = (token:string) => {
     const decode = jwtDecode(token)
     return decode
 }

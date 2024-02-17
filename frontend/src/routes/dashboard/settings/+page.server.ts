@@ -2,6 +2,15 @@ import { API_BASE_URL, BASE_URL } from "$env/static/private"
 import { getUser } from "../../../utils/auth"
 import UserFetch from "../../../utils/userFetch"
 
+interface UserData {
+    username: string;
+}
+
+interface LoadFunctionResponse {
+    user: UserData;
+    baseUrl: string;
+}
+
 export const load = async ({cookies}) => {
     const user = getUser(cookies.get('authToken'))
 

@@ -85,22 +85,19 @@ export const actions = {
     const formData = await request.formData()
     const commentId = formData.get('comment_id')
     const useFetch = new UserFetch(`${API_BASE_URL}`, token)
-    const response = await useFetch.delete(`comments/${commentId}`)
-    //const data = await response.json()
-  },
+    await useFetch.delete(`comments/${commentId}`)
+    },
   likeListing: async ({request, cookies}) => {
     const token = cookies.get('authToken')
     const formData = await request.formData()
     const useFetch = new UserFetch(`${API_BASE_URL}`, token)
-    const response = await useFetch.postForm('likes', formData)
-    //const data = await response.json()
+    await useFetch.postForm('likes', formData)
   },
   deleteLike: async ({request, cookies}) => {
     const token = cookies.get('authToken')
     const formData = await request.formData()
     const likeId = formData.get('like_id')
     const useFetch = new UserFetch(`${API_BASE_URL}`, token)
-    const response = await useFetch.delete(`likes/${likeId}`)
-    const data = await response.json()
+    await useFetch.delete(`likes/${likeId}`)
   },
 }

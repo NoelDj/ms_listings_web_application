@@ -2,7 +2,6 @@
     //import UserFetch from '../../utils/userFetch';
     import { onMount } from 'svelte'
     import { createEventDispatcher } from 'svelte'
-    export let data
     export let form
   
     let content = form?.title?.value || ''

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let informationSet
     export let baseImagePath
     import { page } from '$app/stores';
@@ -31,14 +31,14 @@
         }
     })
 
-    function pagination(c, m) {
+    const pagination = (c:number, m:number): Array<string | number> => {
       var current = c,
       last = m,
       delta = 2,
       left = current - delta,
       right = current + delta + 1,
-      range = [],
-      rangeWithDots = [],
+      range: Array<number> = [],
+        rangeWithDots: Array<string | number> = [],
       l;
       
       for (let i = 1; i <= last; i++) {

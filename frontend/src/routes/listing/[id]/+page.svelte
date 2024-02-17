@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let data
     export let form
 
@@ -19,7 +19,7 @@
     
     const images = data.listing.images
 
-    const unslugify = (slug) => slug.replace(/-/g, " ").replace(/\w\S*/g, (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase())
+    const unslugify = (slug:string) => slug.replace(/-/g, " ").replace(/\w\S*/g, (text:string) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase())
 
 </script>
 
