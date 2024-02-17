@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY frontend/package.json frontend/package-lock.json ./
 
-RUN apk --no-cache add --virtual .gyp python make g++ git
+RUN apk --no-cache add --virtual .gyp python make g++
 RUN npm install --only=production
 
 COPY frontend/ .
