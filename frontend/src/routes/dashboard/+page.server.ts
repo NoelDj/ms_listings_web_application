@@ -5,7 +5,6 @@ import { jwtDecode } from "jwt-decode"
 export const load = async ({locals}) => {
     const token = locals.token;
     const decode = jwtDecode(token)
-    console.log(decode.user_id)
     const userId = decode.user_id.toString()
     
     const useFetch = new UserFetch(API_BASE_URL, token)

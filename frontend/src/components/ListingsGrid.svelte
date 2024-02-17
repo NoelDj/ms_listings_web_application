@@ -61,11 +61,6 @@
       
       return rangeWithDots;
     }
-    
-    console.log(informationSet)
-    console.log(informationSet.count, amount)
-    console.log(currentPage, lastPage)
-    console.log(pageNumbers)
 
   </script>
  

@@ -3,7 +3,6 @@ import { API_BASE_URL, BASE_URL } from '$env/static/private';
 /** @type {import('./$types').PageLoad} */
 export async function load({ url }) {
     let endpoint = `${API_BASE_URL}/listings`
-    console.log(`${API_BASE_URL}/listings`)
     const filterParams = [];
 
     url.searchParams.forEach((value, key) => {
