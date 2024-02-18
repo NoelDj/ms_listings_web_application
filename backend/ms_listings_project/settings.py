@@ -150,7 +150,11 @@ ALLOWED_HOSTS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://*',
+    'http://svelteapp:3000',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://converli.com',
+    'https://converli.com',
 ]
 
 CORS_ALLOW_METHODS = [
