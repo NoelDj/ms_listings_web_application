@@ -13,19 +13,16 @@ services:
   djangoapp:
     image: registry.gitlab.com/noel100/ms_listings_web_application/djangoapp:latest
     volumes:
-      - media:/media/
-      - static:/static/
+      - media:/app/media/
     depends_on:
       - db
     env_file:
       - "env_$RTE"
-    ports:
-      - 8000:8000
 
   svelteapp:
     image: registry.gitlab.com/noel100/ms_listings_web_application/svelteapp:latest
     volumes:
-      - media:/media/
+      - media:/app/media/
       - static:/static/
     depends_on:
       - djangoapp
@@ -33,12 +30,13 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - media:/media/
+      - media:/app/media/
       - ./nginx/:/etc/nginx/conf.d/
     ports:
       - 80:80
     depends_on:
       - svelteapp
+      - djangoapp
 
 volumes:
   postgres_data:
