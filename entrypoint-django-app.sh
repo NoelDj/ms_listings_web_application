@@ -5,6 +5,7 @@ echo "Runtime Environment: $RTE"
 python manage.py check
 python manage.py makemigrations
 python manage.py migrate
+python manage.py python manage.py initialize_app
 
 case "$RTE" in
     dev )
