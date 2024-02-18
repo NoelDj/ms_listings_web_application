@@ -150,12 +150,7 @@ ALLOWED_HOSTS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4321',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://converli.com',
-    'http://www.converli.com',
-    'http://svelteapp'
+    '*',
 ]
 
 CORS_ALLOW_METHODS = [
@@ -185,7 +180,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',
     'http://www.converli.com',
-    'http://192.168.96.4',
+    'http://svelteapp',
 ]
 
 AUTH_USER_MODEL = "listings_app.User"
