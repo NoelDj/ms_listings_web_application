@@ -9,7 +9,6 @@ python manage.py migrate
 case "$RTE" in
     dev )
         echo "Development mode"
-        python manage.py initialize_app
         python manage.py runserver 0.0.0.0:8000
         ;;
     test )
@@ -21,6 +20,6 @@ case "$RTE" in
     prod )
         echo "Production mode"   
         python manage.py initialize_app
-        python manage.py check --deploy
+        python manage.py runserver 0.0.0.0:8000
         ;;
 esac
