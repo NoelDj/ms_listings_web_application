@@ -30,7 +30,7 @@
       <div class="mb-4 md:mb-0 w-full mx-auto relative">
         <div class="px-4 lg:px-0">
           <h2 class="text-4xl font-semibold text-gray-800 leading-tight">
-            {textContent}
+            {title}
           </h2>
           <div class="flex gap-3 my-3">
             <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">Likes: {like_count}</span>
