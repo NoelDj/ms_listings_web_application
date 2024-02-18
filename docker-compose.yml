@@ -34,7 +34,6 @@ services:
     image: nginx:latest
     volumes:
       - media:/media/
-      - static:/static/
       - ./nginx/:/etc/nginx/conf.d/
     ports:
       - 80:80
