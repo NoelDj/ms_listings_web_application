@@ -146,7 +146,7 @@ ALLOWED_HOSTS = [
     'localhost',
     'converli.com',
     '127.0.0.1',
-    '192.168.96.3:8000',
+    'djangoapp',
 ]
 
 CORS_ALLOWED_ORIGINS = [
