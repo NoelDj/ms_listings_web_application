@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from listings_app.models import Category
 
+
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
@@ -14,7 +15,7 @@ class Command(BaseCommand):
             {'category_name': 'projects', 'description': 'Showcases and details about completed or ongoing creative endeavors.'},
             {'category_name': 'documents', 'description': 'Documentation and written materials related to project planning and execution.'}
         ]
-        
+
         if not Category.objects.exists():
             for category in categories:
                 Category.objects.create(name=category['category_name'], description=category['description'])
