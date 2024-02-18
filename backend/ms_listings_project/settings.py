@@ -235,8 +235,3 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Think | Create | Inspire",
     "copyright": "www.desphixs.com",
 }
-
-SECURE_HSTS_SECONDS = 31536000
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
