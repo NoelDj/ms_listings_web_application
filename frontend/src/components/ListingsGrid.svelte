@@ -20,16 +20,6 @@
     const previousPage = hasPreviousPage ? parseInt(informationSet.previous.match(/page=(\d+)/)?.[1] || '', 10) : ''
     
     const nextPage = informationSet.next ? parseInt(informationSet.next.match(/page=(\d+)/)[1]) : ''
-    
-    const pageNumbers = pagination(currentPage,lastPage)
-
-    let linkUrl = ''
-
-    $page.url.searchParams.forEach((value, key) => {
-        if (key !== 'page') {
-          linkUrl += `&${key}=${value}`
-        }
-    })
 
     const pagination = (c:number, m:number): Array<string | number> => {
       var current = c,
@@ -61,6 +51,18 @@
       
       return rangeWithDots;
     }
+    
+    const pageNumbers = pagination(currentPage,lastPage)
+
+    let linkUrl = ''
+
+    $page.url.searchParams.forEach((value, key) => {
+        if (key !== 'page') {
+          linkUrl += `&${key}=${value}`
+        }
+    })
+
+    
 
   </script>
  
