@@ -1,5 +1,4 @@
 <script lang="ts">
-    import DOMPurify from 'dompurify';
 
     export let data
     export let form
@@ -9,7 +8,7 @@
     const {isLiked} = data
     const {likeId} = data
     const {title, text, created_at, id, like_count} = data.listing
-    const textContent = DOMPurify.sanitize(text)
+    const textContent = text
     const {username, email, bio, image} = data.listing.owner
     const {name} = data.listing.category
     const files = data.listing.files
