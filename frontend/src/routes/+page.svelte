@@ -1,5 +1,6 @@
 <script>
     export let data
+    console.log(data)
     import ListingsGrid from '../components/ListingsGrid.svelte';
     import { page } from '$app/stores';
     console.log(data)

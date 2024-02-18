@@ -18,6 +18,7 @@ export async function load({ url }) {
     const baseUrl = BASE_URL
     const response = await fetch(endpoint)
     const data = await response.json()
+    console.log(data)
     const listings = data
     return {
         listings,
