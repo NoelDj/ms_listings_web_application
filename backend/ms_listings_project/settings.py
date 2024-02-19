@@ -85,12 +85,12 @@ DATABASES = {
     'default': {}
 }
 
-if RTE in ('dev', 'test', 'prod'):
+if RTE in ('dev', 'test'):
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-""" elif RTE == 'prod':
+elif RTE == 'prod':
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('POSTGRES_DB'),
@@ -98,7 +98,7 @@ if RTE in ('dev', 'test', 'prod'):
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
         'HOST': 'db',
         'PORT': '5432',
-    } """
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
